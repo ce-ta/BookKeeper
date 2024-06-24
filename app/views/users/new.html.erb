@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <%= stylesheet_link_tag '/assets/user_new.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'user_new', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
 <div class="flash-message-error">
@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
       <%= f.label :avatar, "アイコン" %>
-      <%= f.file_field :avatar, id: "avatar %>
+      <%= f.file_field :avatar, id: "avatar" %>
     </div>
     <%= f.submit '登録', class: 'input' %>
   <% end %>  

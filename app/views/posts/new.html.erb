@@ -4,13 +4,19 @@
   <%= stylesheet_link_tag '/assets/post_new.css', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-<div class="container">
+  <% if flash.now[:notice] %>
+    <div class="flash-message">
+      <%= flash.now[:notice] %>
+    </div>
+  <% end %>
+
+  <div class="container">
+
   <h1>レビューを投稿</h1>
   <%= form_with model: @post, local: true do |f| %>
-    
     <div class="form-group">
       <%= f.label :title, "タイトル", class: "form-label" %>
-      <%= f.text_field :title, class: "form-control" %>
+      <%= f.text_field :title, value: @book&.title, class: "form-control" %>
     </div>
     
     <div class="form-group">

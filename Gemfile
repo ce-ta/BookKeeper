@@ -51,6 +51,8 @@ end
 
 gem 'carrierwave', '~> 2.0'
 
+gem 'bcrypt', '~> 3.1.7'
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"

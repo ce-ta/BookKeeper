@@ -22,7 +22,7 @@ class PostsController < ApplicationController
         flash[:notice] = "感想を投稿しました"
         redirect_to posts_path
       else
-        flash[:notice] = "タイトルまたは感想が空白です"
+        flash.now[:notice] = "タイトルまたは感想が空白です"
         render :new
       end
     end  
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
     end    
 
     def post_params
-      params.require(:post).permit(:title, :content,)
+      params.require(:post).permit(:title, :content)
     end
 
 end
