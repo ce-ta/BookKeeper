@@ -1,0 +1,33 @@
+<link rel="stylesheet" media="all" href="/assets/post_show.css" data-turbolinks-track="reload" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<h1 class="page-title">レビュー詳細</h1>
+<div class="posts-container">
+  <% if @post.user.present? %>
+    <%= link_to user_path(@post.user), class: "user-info" do %>
+      <div class="user-name">
+        <p><%= @post.user.name %></p>
+      </div>
+    <% end %>
+  <% end %>
+
+  <h2><%= @post.title %></h2>
+  <p><%= @post.content %></p>
+  <p>投稿日: <%= @post.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+  
+  <% if @current_user.present? && @post.user == @current_user %>
+    <div class="post-menus">
+      <div class="post-edit">
+        <%= link_to "/posts/#{@post.id}/edit", class: "btn-edit" do %>
+          <i class="fas fa-edit"></i> 編集
+        <% end %>
+      </div>
+      <div class="post-destroy">
+      <%= button_to(post_path(params[:id]), class: "btn-delete", method: :delete, data: { confirm: "本当に削除しますか？" }) do %>
+          <i class="fas fa-trash-alt"></i> 削除
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

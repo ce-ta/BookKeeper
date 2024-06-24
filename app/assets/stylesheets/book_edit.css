@@ -1,0 +1,150 @@
+/* 基本スタイル */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .flash-message error{
+    color: red;
+  }
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 50px;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 25px;
+    resize: none;
+    overflow: hidden;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .radio-container {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .radio-btn {
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  
+  .input-container {
+    margin-bottom: 15px;
+  }
+  
+  input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .input-container input {
+    width: 100%;
+  }
+  
+  #imagePreview {
+    width: 100px;
+    height: 160px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  #imagePreview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .input-container-img {
+    margin-bottom: 15px;
+  }
+  
+  .input-container-img label {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+  }
+  
+  .input-container-img input {
+    display: none;
+  }
+  
+  .image-preview-container {
+    margin-bottom: 15px;
+  }
+  
+  .registration-btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* モーダルのスタイル */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    display: block;
+  }
+  
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }

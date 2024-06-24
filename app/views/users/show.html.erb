@@ -1,0 +1,24 @@
+<head>
+    <link rel="stylesheet" media="all" href="/assets/user_show.css" data-turbolinks-track="reload" />
+</head>
+<body>
+<% flash.each do |key, message| %>
+  <div class="flash <%= key %>"><%= message %></div>
+<% end %>
+<div class="user-details-container">
+  <div class="user-details">
+    <div class="user-image-and-name">
+      <% if @user.avatar.present? %>
+        <%= image_tag @user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+      <% else %>
+        <div class="default-avatar">No avatar uploaded yet.</div>
+      <% end %>
+      <h2 class="user-name"><%= @user.name %></h2>
+    </div>
+    <p>メールアドレス: <%= @user.email %></p>
+    <% if @user.id == @current_user.id %>
+     <%= link_to "編集", "/users/#{@user.id}/edit", class: "edit-button" %>
+    <% end %>
+  </div>
+</div>
+</body>

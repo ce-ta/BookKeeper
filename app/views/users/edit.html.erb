@@ -1,0 +1,32 @@
+<head>
+    <link rel="stylesheet" media="all" href="/assets/user_edit.css" data-turbolinks-track="reload" />
+</head>
+
+<div class="main users-edit">
+  <div class="container">
+    <div class="form-heading">アカウント編集</div>
+    <div class="form users-form">
+      <div class="form-body">
+      <%= form_with model: @user, url: "/users/#{@user.id}", method: :patch, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :name, "ユーザー名" %>
+        <%= f.text_field :name, id: "name" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, id: "email" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, id: "password" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :avatar, "アイコン" %>
+        <%= f.file_field :avatar %>
+      </div>
+      <%= f.submit "保存", class: "input" %>
+    <% end %>    
+      </div>
+    </div>
+  </div>
+</div>

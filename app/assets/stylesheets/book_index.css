@@ -1,0 +1,154 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.flash-message-success {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  color: #32CD32;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+.search-and-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input{
+  width: 250px;
+  height: 20px;
+  margin-left: 20px;
+}
+
+.search-btn {
+  background-color: rgb(21, 209, 21);
+  color: black;
+  padding: 5px 10px; /* ボタンのサイズを指定 */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-btn:hover {
+  background-color: rgb(33, 135, 33); /* マウスをホバーしたときの色 */
+}
+
+.sort-container {
+  position: relative;
+}
+
+.sort-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.sort-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.sort-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.sort-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.sort-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.sort-dropdown:hover .sort-dropdown-content {
+  display: block;
+}
+
+.sort-dropdown:hover .sort-button {
+  background-color: #3e8e41;
+}
+
+.book-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+/* 検索結果が0件の場合のメッセージを中央に表示 */
+.no-results-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* メッセージエリアの高さを調整 */
+  font-size: 35px; /* メッセージの文字サイズを調整 */
+  color: #333; /* メッセージの文字色を調整 */
+  text-align: center;
+  margin-top: -30px;
+  width: 100%;
+}
+
+.book-item {
+  width: calc(16.666% - 20px); /* 1行に6冊の要素を配置するための幅を計算 */
+  margin-right: 20px; /* 各要素の右側に20pxの余白を設定 */
+  margin-bottom: 20px; /* 各要素の下に20pxの余白を設定 */
+}
+
+.book-thumbnail {
+  border-radius: 4px;
+  width: 85%;
+  height: 200px; /* 固定の高さを設定 */
+  object-fit: contain;
+}
+
+.book-title, .book-author {
+  text-align: center;
+}
+
+.book-author {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.sort-links {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sort-links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.sort-links a:hover {
+  text-decoration: underline;
+}
+
+.form-error {
+  color: red;
+  margin-bottom: 15px;
+}

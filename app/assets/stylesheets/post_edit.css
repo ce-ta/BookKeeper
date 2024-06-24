@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  h1 {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-group p {
+    margin: 0;
+    font-weight: bold;
+    color: #555;
+    width: 20%;
+  }
+
+  .star-rating {
+    display: flex;
+    justify-content: flex-start; /* 左揃えに変更 */
+    align-items: center; /* 垂直方向の中央揃え */
+    flex-direction: row-reverse;
+  }
+  
+  .star-rating .rating-input {
+    display: none;
+  }
+  
+  .star-rating .rating-label {
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    margin-right: 5px; /* 星の間隔を調整 */
+  }
+  
+  .star-rating .rating-input:checked ~ .rating-label {
+    color: #ffca08;
+  }
+  
+  .star-rating .rating-input + .rating-label:hover,
+  .star-rating .rating-input + .rating-label:hover ~ .rating-label {
+    color: #ffca08;
+  }
+  
+  .form-group-1 {
+    width: 80%; /* テキストエリアの幅を変更 */
+    height: 40px; /* 高さを調整 */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    overflow: hidden;
+  }
+  
+  .form-group-2 {
+    width: 80%;
+    height: 150px; /* 高さを調整 */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    overflow: hidden;
+  }
+  
+  input[type="submit"] {
+    display: inline-block; /* ボタンを横並びに */
+    width: auto; /* 幅を自動調整 */
+    padding: 10px 20px; /* パディングを調整 */
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .flash {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .flash.notice {
+    background-color: #dff0d8;
+    color: #000;
+  }
+  

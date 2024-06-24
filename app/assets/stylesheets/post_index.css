@@ -1,0 +1,90 @@
+.container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .flash {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .flash.notice {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+  
+  .flash.alert {
+    background-color: #f2dede;
+    color: #a94442;
+  }
+  
+  .posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* コンテナ全体の幅を設定 */
+  }
+  
+  .posts-container a{
+    text-decoration: none !important; /* 下線を消す */
+    color: inherit; /* リンク色を親要素に従う */
+  }
+  
+  .post-container {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 10px;
+    width: 600px;  /* 固定幅を設定 */
+    height: 150px;  /* 固定高さを設定 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; /* コンテンツを左寄せ */
+    text-decoration: none;
+    box-sizing: border-box; /* パディングとボーダーを含めたサイズ計算 */
+    overflow: hidden;  /* コンテンツが溢れた場合は非表示 */
+    border-radius: 8px;
+  }
+  
+  .post-container:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-name p {
+    text-align: left; /* 左揃え */
+    margin-bottom: 0; /* 他の要素との間に余白を追加 */
+    font-size: 25px;
+  }
+  
+  .post-details {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .stars-container {
+    color: #ccc; /* 評価されていない星の色 */
+    font-size: 25px;
+  }
+  
+  .stars-container .rated {
+    color: #ffca08; /* 評価された星の色 */
+  }
+  
+  .post-title {
+    font-size: 1.5em;
+    color: #333;
+  }

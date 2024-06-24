@@ -1,0 +1,142 @@
+<link rel="stylesheet" media="all" href="/assets/book_new.css" data-turbolinks-track="reload" />
+<div class="container">
+    <h2>書籍登録</h2>
+    
+    <div class="message">
+        <% if flash[:error] %>
+        <div id="flash-message" style="color: red;">
+            <% flash[:error].split(',').each do |error| %>
+            <div><%= error.strip %></div>
+            <% end %>
+        </div>
+        <% elsif flash[:success] %>
+        <div id="flash-message" style="color: green;">
+            <%= flash[:success] %>
+        </div>
+        <% end %>
+    </div>
+
+    <%= form_with(model: @book, local: true, html: { multipart: true }) do |f| %>
+        <div class="form-group">
+          <%= f.label :title, "タイトル:" %>
+          <%= f.text_area :title, rows: 1, cols: 30 %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :author, "著者:" %>
+          <%= f.text_area :author, rows: 1, cols: 20 %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :publisher, "出版社:" %>
+          <%= f.text_area :publisher, rows: 1, cols: 10 %>
+        </div>
+        
+        <div class="radio-container">
+          <%= f.radio_button :genre, "文学・文芸", id: "literature" %>
+          <%= f.label :genre, "文学・文芸", for: "literature", class: "radio-btn" %><br>
+          
+          <%= f.radio_button :genre, "絵本・児童書", id: "picture-books" %>
+          <%= f.label :genre, "絵本・児童書", for: "picture-books", class: "radio-btn" %><br>
+          
+          <%= f.radio_button :genre, "コミック", id: "comics" %>
+          <%= f.label :genre, "コミック", for: "comics", class: "radio-btn" %><br>
+        </div>
+        
+        <div class="input-container">
+          <%= f.label :date, "出版日※半角数字で８字入力してください", for: "dateInput" %>
+          <%= f.text_field :date, class: "date-input", id: "dateInput", maxlength: 8, oninput: "formatDate(this)" %>
+        </div>
+        
+        <div class="input-container-img">
+          <%= f.label :book_image, "表紙画像", for: "imageInput", class: "input-container-img-label" %>
+          <%= f.file_field :book_image, id: "imageInput", accept: "image/*", onchange: "previewImage(event)" %>
+        </div>
+        
+        <div class="image-preview-container">
+          <img id="imagePreview" src="#" alt="jpgまたはpngファイルをアップロードしてください">
+        </div>
+        
+        <div class="registration-btn">
+          <%= f.submit "登録" %>
+        </div>
+      <% end %>      
+</div>
+
+<script>
+function formatDate(input) {
+    let value = input.value.replace(/\D/g, ''); // 数字以外の文字を削除
+
+    if (value.length !== 8) {
+        input.value = value;
+        validateDate(); // 日付の妥当性を検証
+        return;
+    }
+
+    let year = value.substring(0, 4);
+    let month = value.substring(4, 6);
+    let day = value.substring(6, 8);
+
+    input.value = year + "/" + month + "/" + day;
+    validateDate(); // 日付の妥当性を検証
+}
+
+function validateDate() {
+    var dateInput = document.getElementById("dateInput");
+    var parts = dateInput.value.split('/');
+    if (parts.length !== 3) {
+        dateInput.setCustomValidity("日付は半角数字8文字で入力してください");
+        return;
+    }
+    var year = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var day = parseInt(parts[2], 10);
+    var date = new Date(year, month - 1, day);
+
+    // 今日の日付を取得
+    var today = new Date();
+    today.setHours(0, 0, 0, 0); // 時間をゼロにセット
+
+    if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
+        dateInput.setCustomValidity("有効な日付を入力してください");
+    } else if (date > today) {
+        dateInput.setCustomValidity("今日より先の日付は設定できません");
+    } else {
+        dateInput.setCustomValidity("");
+    }
+}
+
+function previewImage(event) {
+    var input = event.target;
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('imagePreview').setAttribute('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var form = document.querySelector('form');
+    var dateInput = document.getElementById("dateInput");
+
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            validateDate();
+            dateInput.reportValidity();
+        }
+    });
+
+    if (dateInput.value) {
+        var formattedDate = dateInput.value.replace(/(\d{4})(\d{2})(\d{2})/, '$1/$2/$3');
+        dateInput.value = formattedDate;
+        validateDate(); // ページロード時にも日付の妥当性を検証
+    }
+});
+</script>
+

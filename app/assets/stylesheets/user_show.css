@@ -1,0 +1,203 @@
+.flash {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    color: #32CD32;
+    margin-bottom: 20px;
+  }
+  
+  .user-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* 投稿リストとの間隔 */
+  }
+  
+  .user-details {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-avatar {
+    width: 60px; /* アバターのサイズを調整 */
+    height: 60px;
+    border-radius: 50%; /* 丸い形にする */
+    margin-right: 10px; /* アバターとユーザー名との間隔 */
+  }
+  
+  .default-avatar {
+    width: 60px; /* デフォルトアバターのサイズ */
+    height: 60px;
+    border-radius: 50%; /* 丸い形にする */
+    background-color: #ccc; /* デフォルトアバターの背景色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-name {
+    font-size: 1.2em; /* ユーザー名のフォントサイズ */
+    margin: 0; /* h2タグのマージンをリセット */
+  }
+  
+  .stars-container {
+    color: #ccc; /* 評価されていない星の色 */
+    font-size: 25px;
+  }
+  
+  .stars-container .rated {
+    color: #ffca08; /* 評価された星の色 */
+  }
+  
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .user-name {
+    margin: 0; /* ヘッダー要素のデフォルトマージンをリセット */
+  }
+  
+  .user-details h2, .user-details p {
+    margin: 10px 0;
+    text-align: left; /* テキストを左寄せ */
+  }
+  
+  .user-details h2 {
+    font-size: 24px;
+  }
+  
+  .user-details p {
+    font-size: 18px;
+  }
+  
+  .edit-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: darkblue;
+  }
+  
+  .user-posts-index {
+    margin-left: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 中央寄せ */
+    width: 60%;
+  }
+  
+  .posts-index-item-link {
+    width: 60%; /* 幅を適度に狭くして中央寄せ */
+    margin: 10px 0; /* アイテム間の余白 */
+  }
+  
+  .posts-index-item-link a {
+    text-decoration: none !important; /* 下線を消す */
+    color: inherit; /* リンク色を親要素に従う */
+  }
+  
+  .posts-index-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  .posts-index-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .stars-container {
+    margin-bottom: 10px; /* 星とタイトルの間の余白 */
+    color: #ccc;
+    font-size: 25px;
+  }
+  
+  .stars-container .rated {
+    color: #ffca08;
+  }
+  
+  .post-right {
+    flex-grow: 1;
+  }
+  
+  .post-content {
+    text-align: left; /* コンテンツを左寄せ */
+    color: black; /* テキストの色 */
+    margin: 5px 0; /* コンテンツ間の余白 */
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+  }
+  
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 30%;
+    max-width: 700px;
+  }
+  
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+  }
+  
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }

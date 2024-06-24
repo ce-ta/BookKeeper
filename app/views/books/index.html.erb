@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Index</title>
+  <link rel="stylesheet" media="all" href="/assets/book_index.css" data-turbolinks-track="reload" />
+</head>
+<body>
+
+<div class="flash-message-success">
+<%= flash[:success] %>
+</div>
+
+<h1>登録書籍一覧</h1>
+
+<!-- 検索フォーム -->
+<div class="search-and-sort-container">
+<%= form_tag(books_path, method: :get) do %>
+  <input class="search-input" type="text" name="search" placeholder="タイトルまたは作者名で検索" value="<%= params[:search] %>">
+  <input class="search-btn" type="submit" value="検索">
+<% end %>
+
+<!-- 並べ替えリンク -->
+<div class="sort-container">
+  <div class="sort-dropdown">
+    <button class="sort-button">
+      並べ替え ▼
+    </button>
+    <div class="sort-dropdown-content">
+      <%= link_to "　　　　　", books_path %>
+      <%= link_to "作成順", books_path(sort: 'created_at') %>
+      <%= link_to "更新順", books_path(sort: 'updated_at') %>
+      <%= link_to "タイトル順", books_path(sort: 'title') %>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="book-container">
+<% if @books.empty? %>
+  <div class="no-results-message">
+    <p>書籍が見つかりませんでした</p>
+  </div>
+<% else %>
+  <% @books.each do |book| %>
+    <div class="book-item">
+      <%= link_to(book_path(book)) do %>
+        <div class="book-image">
+          <% if book.book_image.present? %>
+            <%= image_tag book.book_image.url, class: "book-thumbnail" %>
+          <% else %>
+            <p>No image available</p>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="book-title">
+        <%= book.title %>
+      </div>
+      <div class="book-author">
+        <%= book.author %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+</div>
+<script>
+document.querySelectorAll('.book-thumbnail').forEach(image => {
+  image.addEventListener('mouseenter', () => {
+      image.style.transform = 'translateY(-5px)';
+      image.style.boxShadow = '0px 5px 10px rgba(0, 0, 0, 0.3)';
+  });
+
+  image.addEventListener('mouseleave', () => {
+      image.style.transform = 'translateY(0)';
+      image.style.boxShadow = 'none';
+  });
+});
+</script>
+</body>
+</html>

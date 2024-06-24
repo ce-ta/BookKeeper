@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>書籍のレビュー</title>
+  <link rel="stylesheet" media="all" href="/assets/post_index.css" data-turbolinks-track="reload" />
+</head>
+<body>
+  <div class="container">
+    <h1>書籍レビュー</h1>
+    <% flash.each do |key, message| %>
+      <div class="flash <%= key %>"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="posts-container">
+    <% @posts.each do |post| %>
+      <%= link_to "/posts/#{post.id}", class: "post-link" do %> <!-- パスヘルパーを使用してリンク先を修正 -->
+        <div class="post-container">
+          <div class="user-info">
+            <div class="user-name">
+              <p><%= post.user.name if post.user %></p>
+            </div>
+          </div>
+          <div class="post-title">
+            <%= post.title %>
+          </div>
+          <div class="post-content">
+            <%= post.content %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const starsContainers = document.querySelectorAll('.stars-container');
+
+  starsContainers.forEach((starsContainer) => {
+    const rating = parseInt(starsContainer.dataset.rating || 0); // 評価がない場合は0とする
+    const starsHTML = generateStars(rating);
+    starsContainer.innerHTML = starsHTML;
+  });
+});
+
+function generateStars(rating) {
+  let starsHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      starsHTML += '<span class="rated">★</span>'; // 評価された星
+    } else {
+      starsHTML += '☆'; // 評価されていない星
+    }
+  }
+  return starsHTML;
+}
+  </script>
+</body>
+</html>

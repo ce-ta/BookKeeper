@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag '/assets/user_login_form.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+
+<div class="login-flash">
+  <%= flash[:login] %>
+</div>
+
+<div class="form_heading">ログイン</div>
+
+<% if @error_message %>
+  <div class="form-error">
+    <%= @error_message %>
+  </div>
+<% end %>
+
+<div class="form-container">
+<%= form_tag("/login") do %>
+  <p>メールアドレス</p>
+  <input type="email" name="email" value="<%= @input_email %>">
+  <p>パスワード</p>
+  <input type="password" name="password">
+  <input type="submit" value="ログイン">
+<% end %>
+</div>

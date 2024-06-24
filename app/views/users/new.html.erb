@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <%= stylesheet_link_tag '/assets/user_new.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<div class="flash-message-error">
+  <%= flash[:signup_error] %>
+</div>
+<div class="container">
+  <h1>ユーザー登録</h1>
+  <%= form_with model: @user, local: true, html: {multipart: true} do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, id: 'name', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, id: 'email', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password, required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :avatar, "アイコン" %>
+      <%= f.file_field :avatar, id: "avatar %>
+    </div>
+    <%= f.submit '登録', class: 'input' %>
+  <% end %>  
+</div>
+</body>
+</html>
