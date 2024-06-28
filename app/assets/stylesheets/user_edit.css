@@ -7,6 +7,14 @@
     text-align: center;
     margin: auto;
   }
+
+  .form-error {
+    color: red;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
   
   .form-heading {
     margin-bottom: 20px;

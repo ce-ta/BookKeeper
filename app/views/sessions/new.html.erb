@@ -1,9 +1,16 @@
-<%= stylesheet_link_tag '/assets/user_login_form.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag '/assets/session_new.css', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-
+<% if flash[:alert] %>
 <div class="form-error">
-  <%= flash[:login_error] %>
+  <%= flash[:alert] %>
 </div>
+<% end %>
+
+<% if flash[:success] %>
+<div class="form-success">
+  <%= flash[:success] %>
+</div>
+<% end %>
 
 <div class="form_heading">ログイン</div>
 

@@ -1,0 +1,22 @@
+<%= stylesheet_link_tag '/assets/comment_edit.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+
+<% if flash[:error] %>
+  <div class="flash">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<div class="container">
+  <h1>コメントを編集</h1>
+  <%= form_with(model: @comment, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :title, "コメント" %>
+      <%= f.text_field :body, class: "form-group-1" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "更新" %>
+    </div>
+  <% end %>
+  <%= link_to '戻る', post_path(@comment.post_id), class: 'back-link' %>
+</div>

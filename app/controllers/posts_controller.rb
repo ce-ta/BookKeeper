@@ -40,11 +40,11 @@ class PostsController < ApplicationController
       @post.content = params[:post][:content]
       
       if @post.save
-        flash[:notice] = "投稿を編集しました"
-        redirect_to posts_path
+        flash[:success] = "投稿を編集しました"
+        redirect_to "/posts/#{@post.id}"
       else
-        puts @post.errors.full_messages # エラーメッセージを表示
-        render("posts/edit")
+        puts @post.errors.full_messages
+        render :edit
       end
     end    
       
@@ -57,7 +57,8 @@ class PostsController < ApplicationController
         flash[:alert] = "他のユーザーの投稿は削除できません"
       end
       redirect_to posts_path
-    end    
+    end  
+      
 
     def post_params
       params.require(:post).permit(:title, :content)

@@ -48,7 +48,7 @@
           <% if book.book_image.present? %>
             <%= image_tag book.book_image.url, class: "book-thumbnail" %>
           <% else %>
-            <p>No image available</p>
+            <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "book-thumbnail" %>
           <% end %>
         </div>
       <% end %>

@@ -33,14 +33,30 @@
         </div>
         
         <div class="radio-container">
-          <%= f.radio_button :genre, "文学・文芸", id: "literature" %>
-          <%= f.label :genre, "文学・文芸", for: "literature", class: "radio-btn" %><br>
-          
-          <%= f.radio_button :genre, "絵本・児童書", id: "picture-books" %>
-          <%= f.label :genre, "絵本・児童書", for: "picture-books", class: "radio-btn" %><br>
-          
-          <%= f.radio_button :genre, "コミック", id: "comics" %>
-          <%= f.label :genre, "コミック", for: "comics", class: "radio-btn" %><br>
+            <div class="form-group">
+                <%= f.radio_button :genre, "文学・文芸", id: "literature" %>
+                <%= f.label :genre, "文学・文芸", for: "literature", class: "radio-btn" %><br>
+    
+                <%= f.radio_button :genre, "雑誌", id: "magazine" %>
+                <%= f.label :genre, "雑誌", for: "magazine", class: "radio-btn" %><br>
+    
+                <%= f.radio_button :genre, "コミック", id: "comic" %>
+                <%= f.label :genre, "コミック", for: "comic", class: "radio-btn" %><br>
+
+                <%= f.radio_button :genre, "文庫", id: "pocketbook" %>
+                <%= f.label :genre, "文庫", for: "pocketbook", class: "radio-btn" %><br>
+            </div>
+      
+            <div class="form-group">
+                <%= f.radio_button :genre, "文芸書", id: "literary_book" %>
+                <%= f.label :genre, "文芸書", for: "literary_book", class: "radio-btn" %><br>
+      
+                <%= f.radio_button :genre, "専門書", id: "specialist_book" %>
+                <%= f.label :genre, "専門書", for: "specialist_book", class: "radio-btn" %><br>
+
+                <%= f.radio_button :genre, "児童書・学習参考書", id: "children_reference" %>
+                <%= f.label :genre, "児童書・学習参考書", for: "children_reference", class: "radio-btn" %><br>
+        </div>
         </div>
         
         <div class="input-container">

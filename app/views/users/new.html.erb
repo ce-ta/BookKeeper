@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <%= stylesheet_link_tag 'user_new', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-<div class="flash-message-error">
-  <%= flash[:signup_error] %>
-</div>
+<% if flash[:signup_errors].present? %>
+  <div class="flash-message-error">
+    <ul>
+      <% flash[:signup_errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="container">
   <h1>ユーザー登録</h1>
   <%= form_with model: @user, local: true, html: {multipart: true} do |f| %>
@@ -21,14 +26,21 @@
     </div>
     <div class="form-group">
       <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password, required: true %>
+      <%= f.password_field :password,id: "password",autocomplete: "new-passwordrd_confirmation", required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "パスワード確認" %>
+      <%= f.password_field :password_confirmation, id: "password_confirmation", autocomplete: "new-passwordrd_confirmation" , required: true %>
     </div>
     <div class="form-group">
       <%= f.label :avatar, "アイコン" %>
       <%= f.file_field :avatar, id: "avatar" %>
     </div>
+    <div class="form-group">
+      <%= f.label :bio, "自己紹介" %>
+      <%= f.text_field :bio, id: "bio" %>
+    </div>
     <%= f.submit '登録', class: 'input' %>
   <% end %>  
 </div>
 </body>
-</html>

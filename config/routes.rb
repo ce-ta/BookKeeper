@@ -21,11 +21,20 @@ Rails.application.routes.draw do
     end
   end
 
+  devise_for :users
+
   # 書籍関連
   resources :books
 
   # 投稿関連
-  resources :posts
+  resources :posts do
+    resources :comments, only: [:create, :new, :edit, :destroy]
+    resources :likes, only: [:create, :destroy], shallow: true
+  end  
+
+  resources :comments do
+    resources :likes, only: [:create, :update, :destroy], shallow: true
+  end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

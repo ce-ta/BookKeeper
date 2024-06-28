@@ -1,0 +1,70 @@
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .flash {
+    color: red;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group-1 {
+    width: calc(80% - 20px); /* 左のラベル分を考慮して幅を計算 */
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none !important;
+    overflow: hidden;
+  }
+  
+  input[type="submit"] {
+    display: block;
+    width: 20%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .back-link {
+    color: white;
+    background-color: #9acd32; /* 黄緑色 */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .back-link:hover {
+    background-color: #8fbf30; /* hover時に少し濃い黄緑色に */
+  }  

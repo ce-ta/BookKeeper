@@ -1,6 +1,12 @@
 <link rel="stylesheet" media="all" href="/assets/post_show.css" data-turbolinks-track="reload" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+<% flash.each do |key, message| %>
+  <div class="flash <%= key %>">
+    <%= message %>
+  </div>
+<% end %>
+
 <h1 class="page-title">レビュー詳細</h1>
 <div class="posts-container">
   <% if @post.user.present? %>
@@ -8,6 +14,8 @@
       <div class="user-avatar">
         <% if @post.user.avatar.present? %>
           <%= image_tag @post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+        <% else %>
+          <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
         <% end %>
       </div>
       <div class="user-name">
@@ -17,22 +25,95 @@
   <% end %>
 
   <h2><%= @post.title %></h2>
-  <p><%= @post.content %></p>
-  <p>投稿日: <%= @post.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
-  
-  <% if @current_user.present? && @post.user == @current_user %>
-    <div class="post-menus">
-      <div class="post-edit">
-        <%= link_to "/posts/#{@post.id}/edit", class: "btn-edit" do %>
-          <i class="fas fa-edit"></i> 編集
-        <% end %>
-      </div>
-      <div class="post-destroy">
-      <%= button_to(post_path(params[:id]), class: "btn-delete", method: :delete, data: { confirm: "本当に削除しますか？" }) do %>
-          <i class="fas fa-trash-alt"></i> 削除
-        <% end %>
-      </div>
+<p><%= @post.content %></p>
+<p>投稿日: <%= @post.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+
+<% if @current_user.present? && @post.user == @current_user %>
+  <div class="post-menus">
+    <div class="post-edit">
+      <%= link_to "/posts/#{@post.id}/edit", class: "btn-edit" do %>
+        <i class="fas fa-edit"></i> 編集
+      <% end %>
     </div>
+    <div class="post-destroy">
+      <%= form_with url: post_path(@post), method: :delete, local: true, class: "btn-delete", data: { confirm: "本当に削除しますか？" } do %>
+        <button type="submit">
+          <i class="fas fa-trash-alt"></i> 削除
+        </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to post_likes_path(@post), method: :post, remote: true, class: 'like-post' do %>
+    <button type="submit">
+      <i class="fas fa-thumbs-up"></i>
+    </button>
+  <% end %>
+  (<span class="like-count"><%= @post.likes.count %></span>)
+</p>
+
+
+  <%= link_to new_post_comment_path(@post), class: 'btn btn-primary' do %>
+    <i class="fas fa-comment-dots"></i>
   <% end %>
 </div>
+<% @post.comments.each do |comment| %>
+    <div class="comment">
+      <div class="comment-user-and-avatar">
+      <%= link_to user_path(comment.user), class: 'comment-user-link' do %>
+        <% if comment.user.avatar.present? %>
+          <%= image_tag comment.user.avatar.url, alt: "ユーザーアイコン", class: "comment-user-avatar" %>
+        <% else %>
+          <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+        <% end %>
+        <div class="comment-user">
+          <p><%= comment.user.name %></p>
+        </div>
+      <% end %>
+      </div>
+      <p><%= comment.body %></p>
+      <p>
+        <%= link_to comment_likes_path(comment), method: :post, remote: true, class: 'like-comment', data: { id: comment.id } do %>
+          <i class="fas fa-thumbs-up"></i>
+        <% end %>
+        (<span class="like-count-<%= comment.id %>"><%= comment.likes.count %></span>)
+      </p>
+      <% if @current_user.present? && comment.user == @current_user %>
+        <div class="comment-edit-btn">
+          <%= link_to "/comments/#{comment.id}/edit", class: "btn-edit" do %>
+            <i class="fas fa-edit"></i> 編集
+          <% end %>
+        </div>
+        <div class="comment-delete-btn">
+          <%= button_to "/comments/#{comment.id}", class: "btn-delete", method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+            <i class="fas fa-trash"></i> 削除
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+<% end %>
 
+
+
+<script>
+  document.addEventListener('turbolinks:load', function() {
+    document.querySelectorAll('.like-post').forEach(function(link) {
+      link.addEventListener('ajax:success', function(event) {
+        var detail = event.detail;
+        var likesCount = detail[0].likes_count;
+        document.querySelector('.like-count').textContent = likesCount;
+      });
+    });
+
+    document.querySelectorAll('.like-comment').forEach(function(link) {
+      link.addEventListener('ajax:success', function(event) {
+        var detail = event.detail;
+        var likesCount = detail[0].likes_count;
+        var commentId = link.dataset.id;
+        document.querySelector('.like-count-' + commentId).textContent = likesCount;
+      });
+    });
+  });
+</script>

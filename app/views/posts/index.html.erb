@@ -15,12 +15,14 @@
 
   <div class="posts-container">
     <% @posts.each do |post| %>
-      <%= link_to "/posts/#{post.id}", class: "post-link" do %> <!-- パスヘルパーを使用してリンク先を修正 -->
+      <%= link_to "/posts/#{post.id}", class: "post-link" do %>
         <div class="post-container">
           <div class="user-info">
             <div class="user-avatar">
               <% if post.user.avatar.present? %>
                 <%= image_tag post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+              <% else %>
+                <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
               <% end %>
             </div>
             <div class="user-name">
@@ -30,36 +32,12 @@
           <div class="post-title">
             <%= post.title %>
           </div>
-          <div class="post-content">
-            <%= post.content %>
-          </div>
+            <div class="post-content">
+              <%= post.content %>
+            </div>
         </div>
       <% end %>
     <% end %>
   </div>
-
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  const starsContainers = document.querySelectorAll('.stars-container');
-
-  starsContainers.forEach((starsContainer) => {
-    const rating = parseInt(starsContainer.dataset.rating || 0); // 評価がない場合は0とする
-    const starsHTML = generateStars(rating);
-    starsContainer.innerHTML = starsHTML;
-  });
-});
-
-function generateStars(rating) {
-  let starsHTML = '';
-  for (let i = 1; i <= 5; i++) {
-    if (i <= rating) {
-      starsHTML += '<span class="rated">★</span>'; // 評価された星
-    } else {
-      starsHTML += '☆'; // 評価されていない星
-    }
-  }
-  return starsHTML;
-}
-  </script>
 </body>
 </html>

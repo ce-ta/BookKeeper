@@ -19,7 +19,7 @@
       <% if @book.book_image.present? %>
         <%= image_tag @book.book_image.url, class: "book-image", id: "bookImage" %>
       <% else %>
-        <p>No image available</p>
+      <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "book-image" %>
       <% end %>
     </div>
 

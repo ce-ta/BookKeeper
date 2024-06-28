@@ -2,23 +2,60 @@
     <link rel="stylesheet" media="all" href="/assets/user_show.css" data-turbolinks-track="reload" />
 </head>
 <body>
-<% flash.each do |key, message| %>
-  <div class="flash <%= key %>"><%= message %></div>
-<% end %>
+  <% if flash[:error].present? %>
+    <div class="flash">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <% if flash[:success].present? %>
+    <div class="flash">
+     <%= flash[:success] %>
+    </div>
+  <% end %>
+
 <div class="user-details-container">
   <div class="user-details">
     <div class="user-image-and-name">
       <% if @user.avatar.present? %>
         <%= image_tag @user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
       <% else %>
-        <div class="default-avatar">No avatar uploaded yet.</div>
+        <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
       <% end %>
       <h2 class="user-name"><%= @user.name %></h2>
     </div>
-    <p>メールアドレス: <%= @user.email %></p>
+    <div class="user-bio">
+      <%= @user.bio %>
+    </div>
     <% if @user.id == @current_user.id %>
      <%= link_to "編集", "/users/#{@user.id}/edit", class: "edit-button" %>
     <% end %>
   </div>
+</div>
+
+<div class="posts-container">
+  <h2>投稿</h2>
+  <% @posts.each do |post| %>
+    <%= link_to post_path(post), class: "post-link" do %>
+      <div class="post-container">
+        <div class="user-info">
+          <div class="user-avatar">
+            <% if post.user.avatar.present? %>
+              <%= image_tag post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+            <% end %>
+          </div>
+          <div class="user-name">
+            <p><%= post.user.name if post.user %></p>
+          </div>
+        </div>
+        <div class="post-title">
+          <%= post.title %>
+        </div>
+        <div class="post-content">
+          <%= post.content %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 </body>
