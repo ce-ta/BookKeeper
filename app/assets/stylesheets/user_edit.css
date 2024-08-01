@@ -1,0 +1,185 @@
+/* user_form.css */
+
+.flash-message-error {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  color: #32CD32; /* エラーメッセージの色を設定 */
+  margin-bottom: 20px;
+}
+
+.form-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: #ffffff; /* 背景色を白に設定 */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  width: 350px; /* 幅を指定 */
+  text-align: center; /* 中央揃えにする */
+  margin: 10px auto; /* 中央に配置 */
+}
+
+.form-group {
+  margin-bottom: 15px; /* フォーム要素の間隔を設定 */
+  text-align: left; /* 左揃えにする */
+}
+
+label {
+  display: block; /* ラベルをブロック要素として表示 */
+  margin-bottom: 5px; /* マージンを設定 */
+  font-weight: bold; /* 太字にする */
+  color: #555555; /* テキスト色を設定 */
+}
+
+.bio {
+  width: calc(100% - 12px);
+  height: 130px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: calc(100% - 12px); /* 幅を計算して指定 */
+  padding: 6px; /* 内側の余白を設定 */
+  border: 1px solid #cccccc; /* 枠線を設定 */
+  border-radius: 4px; /* 角丸にする */
+  box-sizing: border-box; /* ボックスモデルを設定 */
+}
+
+.input {
+  background-color: #007bff; /* 背景色を設定 */
+  color: #ffffff; /* テキスト色を設定 */
+  border: none; /* 枠線をなくす */
+  padding: 10px 20px; /* 内側の余白を設定 */
+  border-radius: 4px; /* 角丸にする */
+  cursor: pointer; /* ポインターを設定 */
+  font-size: 16px; /* フォントサイズを設定 */
+}
+
+.input:hover {
+  background-color: #218838; /* ホバー時の背景色を変更 */
+}
+
+/* モーダル */
+#avatar-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9); /* 透明度付き黒背景 */
+}
+
+#avatar-modal-img {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  max-height: 80%;
+  object-fit: contain; /* 画像をモーダル内に収める */
+}
+
+/* 画像プレビュー */
+.avatar-preview-container {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-preview {
+  margin-top: 10px;
+  max-width: 100px;
+  max-height: 100px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 影のトランジションを追加 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
+
+.avatar-preview:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時の影の強化 */
+}
+
+.current-image {
+  max-width: 100%; /* 画像の幅を最大まで広げる */
+  margin-top: 10px; /* 上部のマージンを設定 */
+  border: 1px solid #ccc; /* 枠線を設定 */
+  border-radius: 4px; /* 角丸にする */
+  width: 150px; /* 幅を指定 */
+  height: auto; /* 高さを自動調整 */
+  transition: all 0.3s ease; /* アニメーションを設定 */
+}
+
+.current-image:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 影を追加 */
+  transform: translateY(-4px); /* 少し浮かせる */
+  cursor: pointer; /* ポインターを設定 */
+}
+
+.image-input {
+  padding: 5px; /* 内側の余白を設定 */
+}
+
+/* モーダルのスタイル */
+.modal {
+  display: none; /* 初期状態では非表示 */
+  position: fixed; /* 固定表示 */
+  z-index: 1000; /* 最前面に表示 */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* スクロールバーを表示 */
+  background-color: rgba(0, 0, 0, 0.7); /* 背景を暗くする */
+  justify-content: center; /* 中央揃えにする */
+  align-items: center; /* 中央揃えにする */
+}
+
+.modal-content {
+  max-width: 90%; /* 最大幅を指定 */
+  max-height: 90%; /* 最大高さを指定 */
+  margin: auto; /* 中央揃えにする */
+}
+
+.close {
+  position: absolute; /* 絶対位置指定 */
+  top: 20px; /* 上部からの位置 */
+  right: 35px; /* 右側からの位置 */
+  color: #f1f1f1; /* テキスト色を設定 */
+  font-size: 40px; /* フォントサイズを設定 */
+  font-weight: bold; /* 太字にする */
+  transition: 0.3s; /* アニメーションを設定 */
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb; /* ホバー時のテキスト色を変更 */
+  text-decoration: none; /* 下線を消す */
+  cursor: pointer; /* ポインターを設定 */
+}
+
+/* エラーメッセージのスタイル */
+.form-error {
+  color: red; /* 赤色に設定 */
+  margin-bottom: 15px; /* 下部のマージンを設定 */
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}

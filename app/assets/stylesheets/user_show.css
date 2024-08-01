@@ -1,0 +1,290 @@
+/* user_show.css */
+
+.notice {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  color: #32CD32;
+  margin-bottom: 20px;
+}
+
+.user-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* 投稿リストとの間隔 */
+}
+
+.user-details {
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-image-and-name {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 中央に揃える場合は必要 */
+  margin-bottom: 20px; /* ユーザー名とバイオの間隔 */
+}
+
+.user-avatar {
+  width: 60px; /* アバターのサイズを調整 */
+  height: 60px;
+  border-radius: 50%; /* 丸い形にする */
+  margin-right: 10px; /* アバターとユーザー名との間隔 */
+}
+
+.user-name {
+  font-size: 1.5em; /* フォントサイズの調整 */
+  margin: 0; /* 余白のリセット */
+}
+
+.user-bio {
+  margin-right: auto;
+}
+
+.user-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    align-items: center;
+    width: 70px;
+    height: 45px;
+    margin-right: 30px;
+  }
+
+.delete-button {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  align-items: center;
+  width: 70px;
+  height: 45px;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #0056b3;
+}
+
+.tab-content {
+  display: none; /* 初期状態では全てのタブコンテンツを非表示 */
+}
+.tab-content#posts {
+  display: block; /* 投稿タブを表示 */
+}
+
+.tab-links {
+  display: flex;
+  justify-content: center; /* 中央寄せ */
+  gap: 20px; /* タブリンク間の間隔 */
+  margin-top: 20px;
+}
+
+.tab-link {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 25px;
+  width: max-content; 
+  color: rgb(90, 90, 90);
+}
+
+.tab-link:hover {
+  color: #2d2d2d;
+}
+
+.tab-link.active {
+  color: black;
+  border-bottom: 3px solid blue; /* アクティブなタブの下に線を表示 */
+}
+
+.posts-container,
+.favorites-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.posts-container a,
+.favorites-container a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.post-container,
+.favorite-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 10px;
+  width: 400px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 内容を上に揃える */
+  align-items: flex-start; /* 内容を上に揃える */
+  text-align: left;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-container:hover,
+.favorite-container:hover {
+  background-color: #f0f0f0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.post-title {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.post-genre {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.post-content {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.post-title,
+.post-content {
+  margin: 5px 0; /* コンテンツ間の余白 */
+}
+
+.post-link {
+  text-decoration: none !important; /* 下線を消す */
+  color: inherit; /* リンク色を親要素に従う */
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 中央揃え */
+  margin-top: 20px;
+}
+
+.comment-link {
+  text-decoration: none;
+  color: black;
+}
+
+.comment-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 10px;
+  width: 400px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 内容を上に揃える */
+  align-items: flex-start; /* 内容を上に揃える */
+  text-align: left;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-container:hover {
+  background-color: #f0f0f0;
+}
+
+.comment-user-and-avatar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.comment-user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-user p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.comment-body p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.no-post,
+.no-comment,
+.no-favorite {
+  margin-top: 50px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .tab-link {
+    padding: 10px;
+    font-size: 20px;
+  }
+  
+  .post-container,
+  .comment-container,
+  .favorite-container {
+    width: 350px;
+  }
+}

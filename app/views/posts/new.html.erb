@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>書籍のレビューを投稿</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag '/assets/post_new.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <h1 class="title">レビューを投稿</h1>
+  <div class="container">
+    <%= form_with model: @post, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :title, "書籍タイトル", class: "form-label" %>
+        <%= f.text_field :title, value: @post.title, class: "form-control", readonly: true  %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :genre, "ジャンル", class: "form-label" %>
+        <%= f.text_field :genre, value: @post.genre, class: "form-control", readonly: true  %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :content, "感想", class: "form-label" %>
+        <%= f.text_area :content, id: "content", class: "form-control-1", maxlength: "140", rows: 4, onkeydown: "return event.key != 'Enter';" %>
+      </div>
+    
+      <%= f.submit "投稿する", class: "btn btn-primary" %>
+    <% end %>  
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const starRatings = document.querySelectorAll('.rating-input');
+
+      starRatings.forEach((rating) => {
+        rating.addEventListener('change', (e) => {
+          const stars = rating.parentNode.querySelectorAll('.rating-label');
+          stars.forEach((star) => {
+            star.classList.remove('selected');
+          });
+          e.target.nextElementSibling.classList.add('selected');
+        });
+      });
+
+      // 感想のテキストエリアの文字数制限
+      const textArea = document.querySelector('.form-control-1');
+      textArea.addEventListener('input', function() {
+        if (this.value.length > 140) {
+          this.value = this.value.slice(0, 140); // 最大文字数を超えた場合は切り捨てる
+        }
+      });
+    });
+  </script>
+</body>
+</html>

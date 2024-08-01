@@ -1,0 +1,76 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag 'user_new', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+
+<div class="container">
+<h1>ユーザー登録</h1>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="form-group">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, id: 'name' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, id: 'email' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password, id: "password", autocomplete: "new-password" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "パスワード（確認）" %>
+      <%= f.password_field :password_confirmation, id: "password_confirmation", autocomplete: "new-password" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :avatar, "アイコン" %>
+      <%= f.file_field :avatar, id: "avatar", accept: "image/*", onchange: "previewAvatar(this);" %>
+      <div class="avatar-preview-container">
+        <img id="avatar-preview" src="#" alt="Avatar Preview" class="avatar-preview" onclick="expandAvatar(this);">
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :bio, "自己紹介" %>
+      <%= f.text_field :bio, id: "bio" %>
+    </div>
+    <%= f.submit '登録', class: 'input' %>
+<% end %>
+</div>
+
+<script>
+function previewAvatar(input) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('avatar-preview').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  // アバター画像をクリックして拡大表示する
+  function expandAvatar(img) {
+
+    var expandedImg = document.createElement('div');
+    expandedImg.className = 'expanded-avatar';
+    expandedImg.innerHTML = `
+      <div class="expanded-content">
+        <span class="close-btn" onclick="closeExpandedAvatar()">×</span>
+        <img src="${img.src}" alt="Expanded Avatar">
+      </div>
+    `;
+
+    document.body.appendChild(expandedImg);
+  }
+
+  // 拡大表示を閉じる
+  function closeExpandedAvatar() {
+    var expandedImg = document.querySelector('.expanded-avatar');
+    if (expandedImg) {
+      expandedImg.remove();
+    }
+  }
+</script>

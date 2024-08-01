@@ -1,0 +1,102 @@
+<head>
+  <meta charset="UTF-8">
+  <title>書籍のレビュー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media="all" href="/assets/post_index.css" data-turbolinks-track="reload" />
+</head>
+<body>
+
+  <div class="search-container">
+    <button id="toggle-search" class="btn-search">検索フォーム</button>
+    <div id="search-form" class="search-form hidden">
+      <button id="close-search" class="close-search-btn">&times;</button>
+      <%= form_tag(posts_path, method: :get) do %>
+        <input class="search-input" type="text" name="search" placeholder="キーワードで検索" value="<%= params[:search] %>">
+        <div class="radio-container">
+          <h3>ジャンル</h3>
+          <div class="genre-options">
+            <label><%= radio_button_tag :genre, "文学・文芸", params[:genre] == "文学・文芸" %> 文学・文芸</label>
+            <label><%= radio_button_tag :genre, "雑誌", params[:genre] == "雑誌" %> 雑誌</label>
+            <label><%= radio_button_tag :genre, "コミックス", params[:genre] == "コミックス" %> コミックス</label>
+            <label><%= radio_button_tag :genre, "文庫", params[:genre] == "文庫" %> 文庫</label>
+            <label><%= radio_button_tag :genre, "文芸書", params[:genre] == "文芸書" %> 文芸書</label>
+            <label><%= radio_button_tag :genre, "専門書", params[:genre] == "専門書" %> 専門書</label>
+            <label><%= radio_button_tag :genre, "児童書・学習参考書", params[:genre] == "児童書・学習参考書" %> 児童書・学習参考書</label>
+        </div>
+        <input class="search-btn" type="submit" value="検索">
+      <% end %>
+    </div>
+  </div>
+  
+  <h1 class="title">書籍レビュー</h1>
+
+  <div class="posts-container">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <%= link_to "/posts/#{post.id}", class: "post-link" do %>
+          <div class="post-container">
+            <div class="user-info">
+              <div class="user-avatar">
+                <% if post.user.avatar.present? %>
+                  <%= image_tag post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+                <% else %>
+                  <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+                <% end %>
+              </div>
+              <div class="user-name">
+                <p><%= post.user.name if post.user %></p>
+              </div>
+            </div>
+            <div class="post-title">
+              <%= post.title %>
+            </div>
+            <div class="post-genre">
+              <%= post.genre %>
+            </div>
+            <div class="post-content">
+              <%= post.content %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <div class="no-post">
+        <p>レビューはありません</p>
+      </div>
+    <% end %>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleSearchBtn = document.getElementById('toggle-search');
+      const searchForm = document.getElementById('search-form');
+      const closeSearchBtn = document.getElementById('close-search');
+
+      toggleSearchBtn.addEventListener('click', function() {
+        searchForm.classList.toggle('hidden');
+        searchForm.classList.add('slide-down');
+        searchForm.classList.remove('slide-up');
+      });
+
+      closeSearchBtn.addEventListener('click', function() {
+        searchForm.classList.add('hidden');
+      });
+    });
+
+    document.querySelectorAll("input[type=radio]").forEach((radio) => {
+      radio.addEventListener("click", () => {
+        if (radio.classList.contains("is-checked")) {
+          radio.classList.remove("is-checked");
+          radio.checked = false;
+        } else {
+          document
+            .querySelectorAll("input[type='radio'].is-checked")
+            .forEach((checkedRadio) => {
+              checkedRadio.classList.remove("is-checked");
+            });
+          radio.classList.add("is-checked");
+        }
+      });
+    });
+  </script>
+</body>

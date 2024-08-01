@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Index</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media="all" href="/assets/book_index.css" data-turbolinks-track="reload" />
+</head>
+<body>
+<!-- 検索ボタン -->
+<button id="toggle-search-btn" class="search-form-btn">検索フォーム</button>
+
+<!-- 検索フォーム -->
+<div class="search-and-sort-container">
+  <div id="search-form-container" class="search-form-container hidden">
+    <button id="close-search-btn" class="close-btn">&times;</button>
+      <%= form_tag(books_path, method: :get) do %>
+        <input class="search-input" type="text" name="search" placeholder="キーワードで検索" value="<%= params[:search] %>">
+      <div class="genre-options">
+        <label><%= radio_button_tag :genre, "文学・文芸", params[:genre] == "文学・文芸" %> 文学・文芸</label>
+        <label><%= radio_button_tag :genre, "雑誌", params[:genre] == "雑誌" %> 雑誌</label>
+        <label><%= radio_button_tag :genre, "コミックス", params[:genre] == "コミックス" %> コミックス</label>
+        <label><%= radio_button_tag :genre, "文庫", params[:genre] == "文庫" %> 文庫</label>
+        <label><%= radio_button_tag :genre, "文芸書", params[:genre] == "文芸書" %> 文芸書</label>
+        <label><%= radio_button_tag :genre, "専門書", params[:genre] == "専門書" %> 専門書</label>
+        <label><%= radio_button_tag :genre, "児童書・学習参考書", params[:genre] == "児童書・学習参考書" %> 児童書・学習参考書</label>
+      </div>
+      <p>並び替え</p>
+      <div class="genre-options">
+        <label><%= radio_button_tag :sort, "title", params[:sort] == "title" %> タイトル順</label>
+        <label><%= radio_button_tag :sort, "date_desc", params[:sort] == "date_desc" %> 出版日(降順)</label>
+        <label><%= radio_button_tag :sort, "date_asc", params[:sort] == "date_asc" %> 出版日(昇順)</label>
+      </div>
+      <%= link_to "条件をリセットする", books_path, class: "reset-btn" %>
+      <input class="search-btn" type="submit" value="検索">
+    <% end %>
+  </div>
+</div>
+
+<h1>登録書籍一覧</h1>
+
+<div class="book-container">
+<% if @books.empty? %>
+  <div class="no-results-message">
+    <p>書籍が見つかりませんでした</p>
+  </div>
+<% else %>
+  <% @books.each do |book| %>
+    <div class="book-item">
+      <%= link_to(book_path(book)) do %>
+        <div class="book-image">
+          <% if book.book_image.present? %>
+            <%= image_tag book.book_image.url, class: "book-thumbnail" %>
+          <% else %>
+            <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "book-thumbnail" %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="book-title">
+        <%= book.title %>
+      </div>
+      <div class="book-author">
+        <%= book.author %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+</div>
+
+<script>
+document.querySelectorAll('.book-thumbnail').forEach(image => {
+  image.addEventListener('mouseenter', () => {
+      image.style.transform = 'translateY(-5px)';
+      image.style.boxShadow = '0px 5px 10px rgba(0, 0, 0, 0.3)';
+  });
+
+  image.addEventListener('mouseleave', () => {
+      image.style.transform = 'translateY(0)';
+      image.style.boxShadow = 'none';
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  var toggleButton = document.getElementById("toggle-search-btn");
+  var closeButton = document.getElementById("close-search-btn");
+  var searchFormContainer = document.getElementById("search-form-container");
+
+  toggleButton.addEventListener("click", function() {
+    if (searchFormContainer.style.display === "none" || searchFormContainer.style.display === "") {
+      searchFormContainer.style.display = "block";
+    } else {
+      searchFormContainer.style.display = "none";
+    }
+  });
+
+  closeButton.addEventListener("click", function() {
+    searchFormContainer.style.display = "none";
+  });
+});
+
+
+document.querySelectorAll("input[type=radio]").forEach((radio) => {
+  radio.addEventListener("click", () => {
+    if (radio.classList.contains("is-checked")) {
+      radio.classList.remove("is-checked");
+      radio.checked = false;
+    } else {
+      document
+        .querySelectorAll("input[type='radio'].is-checked")
+        .forEach((checkedRadio) => {
+          checkedRadio.classList.remove("is-checked");
+        });
+      radio.classList.add("is-checked");
+    }
+  });
+});
+</script>
+</body>
+</html>

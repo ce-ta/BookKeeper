@@ -1,0 +1,244 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group p {
+  margin: 0 0 5px;
+}
+
+.form-group-1,
+.form-group-2 {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group-2 {
+  height: 150px;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.posts-container {
+  width: 400px;
+  margin: auto;
+  margin-bottom: -6px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.posts-container h1 {
+  margin-top: 0;
+}
+
+.posts-container h2 {
+  margin-bottom: 15px;
+}
+
+.posts-container p {
+  margin: 5px 0;
+}
+
+.button-container {
+  display: flex;
+  align-items: center; /* 縦方向の中央揃え */
+}
+
+.button-container .btn {
+  margin-left: 10px; /* ボタン間のスペースを設定 */
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 24px; /* アイコンのサイズを大きく */
+  display: flex;
+}
+
+.favorite-button:focus {
+  outline: none;
+}
+
+.favorite-button:active {
+  transform: scale(0.95);
+}
+
+.favorite-count {
+  font-size: 20px; /* カウントのサイズを大きく */
+  margin-left: 5px; /* アイコンとの間隔を調整 */
+}
+
+.comment {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f9f9f9;
+  width: 400px;
+  margin: auto;
+  margin-bottom: -2px;
+}
+
+.comment-link {
+  text-decoration: none;
+}
+
+.comment p {
+  color: black;
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name p {
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: black;
+}
+
+.user-name a {
+  text-decoration: none;
+}
+
+.user-name a:hover {
+  text-decoration: underline;
+}
+
+.user-bio {
+  text-align: left;
+}
+
+.post-title {
+  margin-bottom: -10px;
+}
+
+.post-genre {
+  font-weight: bold;
+  margin-bottom: 10px;;
+}
+
+.post-menus {
+  display: flex;
+  gap: 10px;
+}
+
+.post-edit,
+.comment-edit,
+.btn-edit {
+  text-decoration: none;
+  color: blue;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-edit .btn-edit:hover {
+  text-decoration: underline;
+}
+
+.post-edit .fas {
+  font-size: 16px;
+}
+
+.btn-delete {
+  background-color: white;
+  font-size: 16px;
+  border: none;
+  color: red;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-delete i {
+  font-size: 16px;
+}
+
+form.button_to {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-delete:hover {
+  text-decoration: underline;
+}
+
+.p {
+  display: flex;
+  align-items: center; /* 垂直方向中央揃え */
+}
+
+.comment-body {
+  margin: 5px 0;
+}
+
+.comment-menus {
+  display: flex;
+  gap: 10px;
+}
+
+.comment-user-and-avatar {
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  margin: 
+}
+
+.comment-user-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+.comment-user-avatar {
+  width: 35px; /* avatarのサイズ */
+  height: 35px;
+  border-radius: 50%; /* 円形にする場合 */
+  margin-right: 5px; /* avatarと名前の間の間隔 */
+}
+
+.comment-user-name p {
+  margin: 0;
+}
+
+.like-post,
+.btn-primary {
+  display: inline-flex; /* インラインフレックスボックスで横並びにする */
+  align-items: center; /* 垂直方向中央揃え */
+  margin-right: 10px; /* ボタン間の間隔を調整 */
+  text-decoration-line: none;
+}
+
+@media (max-width: 768px) {
+  .posts-container {
+    width: 100%;
+  }
+}

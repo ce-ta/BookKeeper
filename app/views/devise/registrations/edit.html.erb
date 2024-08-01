@@ -1,0 +1,103 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="all" href="/assets/user_edit.css" data-turbolinks-track="reload" />
+</head>
+
+<div class="form-heading"><h1>アカウント編集</h1></div>
+<div class="container">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="form-group">
+    <%= f.label :name, "ユーザー名" %>
+    <%= f.text_field :name, id: "name" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, id: "email" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :avatar, "アイコン" %>
+    <%= f.file_field :avatar, id: "avatar", accept: "image/*", onchange: "previewAvatar(this);" %>
+    <div class="avatar-preview-container">
+      <img id="avatar-preview" src="<%= @user.avatar.url %>" alt="Current Avatar" class="avatar-preview">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :bio, "自己紹介" %>
+    <%= f.text_area :bio, id: "bio", class: "bio", maxlength: 100, row: 5 %>
+  </div>
+
+  <%= f.submit "保存", class: "input" %>
+
+<% end %>
+</div>
+
+<!-- モーダルの構造 -->
+<div id="avatar-modal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="avatar-modal-img">
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const bioInput = document.getElementById("user_bio");
+  const bioCharsLeft = document.getElementById("bio_chars_left");
+  const maxChars = 100;
+
+  bioInput.addEventListener("input", function() {
+    const inputLength = bioInput.value.length;
+
+    if (inputLength > maxChars) {
+      bioInput.value = bioInput.value.slice(0, maxChars);
+    }
+
+    const charsLeft = maxChars - bioInput.value.length;
+    bioCharsLeft.textContent = `${charsLeft}文字まで入力可能です`;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const avatarInput = document.getElementById('avatar');
+  const avatarPreview = document.getElementById('avatar-preview');
+  const modal = document.getElementById('avatar-modal');
+  const modalImg = document.getElementById('avatar-modal-img');
+  const closeBtn = document.getElementsByClassName('close')[0];
+
+  if (avatarInput && avatarPreview) {
+    avatarInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        avatarPreview.src = e.target.result;
+        avatarPreview.style.display = 'block'; // プレビューを表示する
+      }
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (avatarPreview) {
+    avatarPreview.addEventListener('click', function() {
+      if (avatarPreview.src !== "#") {
+        modal.style.display = "block";
+        modalImg.src = avatarPreview.src;
+      }
+    });
+  }
+
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  modal.onclick = function(event) {
+    if (event.target !== modalImg) {
+      modal.style.display = "none";
+    }
+  }
+});
+</script>

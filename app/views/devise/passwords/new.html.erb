@@ -1,0 +1,23 @@
+<head>
+  <%= stylesheet_link_tag '/assets/password_new.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<div class="centered-container">
+  <div class="form-container">
+    <h2>パスワードの再設定</h2>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email, "メールアドレス" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "パスワードリセットの案内を送信" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

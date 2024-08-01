@@ -1,0 +1,21 @@
+.favorite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 20px; /* アイコンのサイズを大きく */
+    display: flex;
+  }
+  
+  .favorite-button:focus {
+    outline: none;
+  }
+  
+  .favorite-button:active {
+    transform: scale(0.95);
+  }
+  
+  .favorite-count {
+    font-size: 20px; /* カウントのサイズを大きく */
+    margin-left: 5px; /* アイコンとの間隔を調整 */
+  }

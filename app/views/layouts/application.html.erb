@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BookKeeper</title>
+    <%= csrf_meta_tags %>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome の CSS -->
+</head>
+
+<body>
+<header>
+  <h1 style="flex: 1;"><a href="/">Book Keeper</a></h1>
+  <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+  <nav>
+    <ul>
+      <button class="menu-close"><i class="fas fa-times"></i></button>
+      <% if user_signed_in? %>
+        <div class="current-li">
+          <li><%= link_to current_user.name, "/users/#{current_user.id}" %></li>
+          <li><a href="/books/new">書籍の追加</a></li>
+          <li><a href="/books">登録書籍一覧</a></li>
+          <li><a href="/posts">書籍レビュー</a></li>
+          <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "current-li" %></li>
+        </div>
+      <% else %>
+        <div class="current-li">
+          <li><%= link_to "新規登録", new_user_registration_path %></li>
+          <li><%= link_to "ログイン", new_user_session_path %></li>
+        </div>
+      <% end %>
+    </ul>
+  </nav>
+</header>
+
+<main>
+    <% flash.each do |key, value| %>
+      <div class="alert <%= "alert-#{key}" %>"><%= value %></div>
+    <% end %>
+    
+  <%= yield %>
+</main>
+
+<footer>
+    <p>&copy; 2024 Book Keeper. All rights reserved.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var menuToggle = document.querySelector(".menu-toggle");
+  var menuClose = document.querySelector(".menu-close");
+  var navMenu = document.querySelector("header nav ul");
+
+  menuToggle.addEventListener("click", function() {
+    navMenu.classList.toggle("open");
+  });
+
+  menuClose.addEventListener("click", function() {
+    navMenu.classList.remove("open");
+  });
+});
+</script>
+
+</body>
+</html>

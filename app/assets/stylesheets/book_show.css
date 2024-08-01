@@ -1,0 +1,277 @@
+.show-container {
+  margin-left: 300px;
+}
+
+.flash-message {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.flash-message.notice {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.flash-message.alert {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.book-container {
+  display: flex;
+}
+
+.book-image-data {
+  flex: 0 0 200px; /* 画像コンテナの幅を固定 */
+  margin-right: 50px; /* 画像と情報の間隔 */
+}
+
+.book-title {
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: -13px;
+}
+
+.book-author {
+  font-size: 25px;
+  color: rgba(51, 51, 51, 0.7);
+  margin-top: -15px;
+  margin-bottom: 50px;
+}
+
+.book-publisher {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.book-publisher {
+  font-size: 20px;
+}
+
+.book-publisher p {
+  font-weight: 700;
+  display: inline-block;
+}
+
+.book-genre {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.book-genre p {
+  font-weight: 700;
+  display: inline-block;
+}
+
+.book-date {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.book-date p {
+  font-weight: 700;
+  display: inline-block;
+}
+
+.book-image {
+  width: 100%;
+  height: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* 影の設定 */
+  cursor: pointer;
+}
+
+.book-image:hover {
+  transform: scale(1.05);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.book-details {
+  flex: 1; /* 残りのスペースを埋める */
+  display: flex;
+  flex-direction: column;
+}
+
+.book-details > * {
+  margin-bottom: 10px; /* 各情報の間隔 */
+}
+
+.book-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 150px;
+}
+
+.btn-post,
+.btn-edit,
+.btn-delete {
+  text-decoration: none;
+  padding: 8px 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center; /* アイコンとテキストを垂直方向に中央揃え */
+}
+
+.btn-post {
+  color: blue;
+  text-decoration: none;
+}
+
+.btn-post:hover {
+  background-color: rgba(0, 0, 255, 0.1);
+}
+
+.btn-edit {
+  background-color: rgba(0, 0, 0, 0);
+  color: #000;
+}
+
+.btn-edit:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-delete {
+  background-color: rgba(0, 0, 0, 0);
+  color: red; /* 文字色を赤に設定 */
+  font-size: 16px;
+}
+
+.btn-delete i {
+  color: red; /* アイコンの色を赤に設定 */
+}
+
+.btn-delete:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+.show-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.show-container {
+  margin-left: 0; /* PC版と異なり、メインコンテンツの左マージンを削除 */
+}
+
+.book-container {
+  display: flex;
+  flex-direction: row; /* コンテンツを横方向に並べる */
+}
+
+.book-image-data {
+  flex: 1; /* 画像コンテナが横幅の一部を占める */
+  margin-right: 20px; /* 画像と情報の間隔を設定 */
+  margin-bottom: 20px;
+}
+
+.book-title {
+  font-size: 25px; /* タイトルのフォントサイズを調整 */
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+.book-author {
+  font-size: 18px; /* 著者名のフォントサイズを調整 */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.book-publisher,
+.book-genre,
+.book-date {
+  font-size: 16px; /* 出版社、ジャンル、日付のフォントサイズを調整 */
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.book-publisher p,
+.book-genre p,
+.book-date p {
+  font-size: 10px; /* 各情報のフォントサイズを調整 */
+}
+
+.book-image {
+  width: 80%; /* 画像の幅を100%に */
+  height: auto; /* 高さは自動調整 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* 影の設定 */
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.book-image:hover {
+  transform: none; /* ホバー時の拡大を無効化 */
+}
+
+.modal-content {
+  max-width: 100%; /* モーダルコンテンツの最大幅を100%に */
+  max-height: 100%; /* モーダルコンテンツの最大高さを100%に */
+}
+
+.book-details {
+  flex: 1; /* 残りのスペースを埋める */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 内容を上に揃える */
+  align-items: flex-start; /* 内容を左に揃える */
+  text-align: left; /* テキストを左寄せ */
+  margin-right: 0; /* 右マージンを削除 */
+}
+
+.book-buttons {
+  justify-content: center; /* ボタンを中央揃え */
+  margin-top: 0px;
+  margin-bottom: 20px;
+  margin-right: 0; /* PC版と異なり、右マージンを削除 */
+}  
+}

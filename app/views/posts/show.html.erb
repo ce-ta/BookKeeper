@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>書籍のレビュー詳細</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media="all" href="/assets/post_show.css" data-turbolinks-track="reload">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <h1 class="page-title">レビュー詳細</h1>
+  <div class="posts-container">
+    <% if @post.user.present? %>
+      <%= link_to user_path(@post.user), class: "user-info" do %>
+        <div class="user-avatar">
+          <% if @post.user.avatar.present? %>
+            <%= image_tag @post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+          <% else %>
+            <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+          <% end %>
+        </div>
+        <div class="user-name">
+          <p><%= @post.user.name %></p>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="post-title"><h2><%= @post.title %></h2></div>
+    <div class="post-genre"><p>ジャンル：<%= @post.genre %></p></div>
+    <p><%= @post.content %></p>
+    <p>投稿日: <%= @post.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+
+<td id="favorite_buttons_<%= @post.id %>" >
+  <div class="button-container">
+    <%= render "favorites/favorite", post: @post %>
+    <%= link_to new_post_comment_path(@post), class: 'btn btn-primary' do %>
+      <i class="fas fa-comment-dots"></i> コメントする
+    <% end %>
+  </div>
+</td>
+
+    <% if current_user.present? && @post.user == current_user %>
+      <div class="post-menus">
+        <div class="post-edit">
+          <%= link_to edit_post_path(@post), class: "btn-edit" do %>
+            <i class="fas fa-edit"></i> 編集
+          <% end %>
+        </div>
+        <div class="post-destroy">
+          <%= button_to post_path(@post), class: "btn-delete", method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+            <i class="fas fa-trash"></i> 削除
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+  <% @post.comments.each do |comment| %>
+    <div class="comment">
+      <div class="comment-user-and-avatar">
+        <%= link_to user_path(comment.user), class: 'comment-user-link' do %>
+          <% if comment.user.avatar.present? %>
+            <%= image_tag comment.user.avatar.url, alt: "ユーザーアイコン", class: "comment-user-avatar" %>
+          <% else %>
+            <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+          <% end %>
+          <div class="comment-user">
+            <p><%= comment.user.name %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="comment-body"><p><%= comment.body %></p></div>
+
+      <% if current_user.present? && comment.user == current_user %>
+      <div class="comment-menus">
+        <div class="comment-edit">
+          <%= link_to edit_comment_path(comment), class: "btn-edit" do %>
+            <i class="fas fa-edit"></i> 編集
+          <% end %>
+        </div>
+        <div class="comment-delete-btn">
+          <%= button_to comment_path(comment), class: "btn-delete", method: :delete, onclick: "return confirm('本当に削除しますか？');" do %>
+            <i class="fas fa-trash"></i> 削除
+          <% end %>
+        </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <script>
+      const deleteButtons = document.querySelectorAll('.btn-delete');
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+          const confirmed = confirm("本当に削除しますか？");
+          if (!confirmed) {
+            event.preventDefault(); // 削除をキャンセルする
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

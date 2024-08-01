@@ -1,0 +1,98 @@
+<head>
+  <title>登録書籍詳細</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/assets/book_show.css">
+</head>
+
+<body>
+  <% if flash[:error].present? %>
+    <div class="flash-message error">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+  
+  <h1 class="title">登録書籍詳細</h1>
+
+  <div class="show-container">
+    <div class="book-container">
+      <div class="book-image-data">
+        <% if @book.book_image.present? %>
+        <%= image_tag @book.book_image.url, class: "book-image", id: "bookImage" %>
+        <% else %>
+        <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "book-image" %>
+        <% end %>
+      </div>
+
+      <div class="book-details">
+        <div class="book-title">
+          <%= @book.title %>
+        </div>
+        <div class="book-author">
+          <%= @book.author %>
+        </div>
+        <div class="book-publisher">
+          <p>出版社：</p><%= @book.publisher %>
+        </div>
+        <div class="book-genre">
+          <p>ジャンル：</p><%= @book.genre %>
+        </div>
+        <div class="book-date">
+          <p>出版日：</p><%= @book.date.strftime('%Y年%-m月%-d日') if @book.date %>
+        </div>
+      </div>
+    </div>
+
+    <!-- モーダルの構造 -->
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01">
+    </div>
+
+    <div class="book-buttons">
+      <div class="book-post">
+        <%= link_to new_post_path(book_title: @book.title, book_genre: @book.genre), id: "post-btn", class: "btn-post" do %>
+          <i class="fas fa-comment"></i> 感想を投稿する
+        <% end %>   
+      </div>
+
+      <div class="book-edit">
+        <%= link_to("/books/#{params[:id]}/edit", class: "btn-edit") do %>
+          <i class="fas fa-edit"></i> 編集
+        <% end %>
+      </div>
+
+      <div class="book-destroy">
+        <%= button_to(book_path(params[:id]), class: "btn-delete", method: :delete, data: { confirm: "本当に削除しますか？" }) do %>
+          <i class="fas fa-trash-alt"></i> 削除
+        <% end %>    
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const bookImage = document.getElementById('bookImage');
+      const modal = document.getElementById("myModal");
+      const modalImg = document.getElementById("img01");
+      const closeBtn = document.getElementsByClassName("close")[0];
+
+      if (bookImage) {
+        bookImage.addEventListener('click', function() {
+          modal.style.display = "flex";
+          modalImg.src = bookImage.src;
+        });
+      }
+
+      closeBtn.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      modal.onclick = function(event) {
+        if (event.target !== modalImg) {
+          modal.style.display = "none";
+        }
+      }
+    });
+  </script>
+</body>

@@ -1,0 +1,74 @@
+/* フォーム全体のスタイル */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* 見出しのスタイル */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* フィールドラベルのスタイル */
+  .field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  /* フィールドのスタイル */
+  .field input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* アクションボタンのスタイル */
+  .actions input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .actions input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* エラーメッセージのスタイル */
+  #error_explanation {
+    border: 1px solid #e3342f;
+    background-color: #fce4e4;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    color: #e3342f;
+  }
+  
+  /* エラーメッセージの見出しスタイル */
+  #error_explanation h2 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+  }
+  
+  /* エラーメッセージのリストスタイル */
+  #error_explanation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #error_explanation ul li {
+    margin: 0 0 5px 0;
+  }

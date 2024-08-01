@@ -1,0 +1,47 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%= stylesheet_link_tag '/assets/comment_edit.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<% if flash[:error] %>
+  <div class="flash">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<h1 class="title">コメントを編集</h1>
+<div class="comment-container">
+  <%= form_with(model: @comment, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :body, "コメント", class: "form-label" %>
+      <%= f.text_area :body, class: "form-label", maxlength: "140", rows: 4, onkeydown: "return event.key != 'Enter';" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "更新", class: "btn-submit" %>
+    </div>
+  <% end %>
+
+  <%= link_to '戻る', post_path(@comment.post_id), class: 'back-link' %>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const starRatings = document.querySelectorAll('.rating-input');
+
+  starRatings.forEach((rating) => {
+    rating.addEventListener('change', (e) => {
+      const stars = rating.parentNode.querySelectorAll('.rating-label');
+      stars.forEach((star) => {
+        star.classList.remove('selected');
+      });
+      e.target.nextElementSibling.classList.add('selected');
+    });
+  });
+
+  // 感想のテキストエリアの文字数制限
+  const textArea = document.querySelector('.form-label');
+  textArea.addEventListener('input', function() {
+    if (this.value.length > 140) {
+      this.value = this.value.slice(0, 140); // 最大文字数を超えた場合は切り捨てる
+    }
+  });
+});
+</script>

@@ -1,0 +1,216 @@
+/* application.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* ヘッダーのスタイル */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #343a40;
+    color: white;
+    padding: 1rem 2rem; /* 適切なパディングを設定 */
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+header h1 a:hover {
+    color: #ffc107; /* マウスオーバー時のリンク色 */
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.5rem; /* gapを縮める */
+}
+
+.current-li {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none; /* リストのデフォルトスタイルを無効化 */
+    padding: 0;
+    gap: 0.5rem; /* gapを縮める */
+}
+
+.current-li li a {
+    margin-left: 0.5rem; /* メニューアイテムの間隔を縮める */
+    text-decoration: none; /* 下線をなくす */
+    color: white;
+    font-size: 20px;
+}
+
+.current-li button {
+    font-size: 20px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.current-li button:hover {
+    color: #ffc107; /* マウスオーバー時のリンク色 */
+}
+
+header nav ul li:first-child {
+    margin-left: 0;
+}
+
+header nav ul li a:hover {
+    color: #ffc107; /* マウスオーバー時のリンク色 */
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-align: center; /* テキストを中央揃え */
+    font-weight: bold; /* フォントの太さをボールドに */
+}
+  
+.alert-notice {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+  
+.alert-alert {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+  
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+  
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+/* エラーメッセージ用のスタイル */
+#error_explanation {
+    text-align: center; /* テキストを中央揃え */
+  }
+  
+  #error_explanation ul {
+    color: red; /* ulを赤色に */
+    font-weight: bold;
+    list-style: none; /* ulのリストマーカーを消す */
+    padding: 0; /* パディングを0に */
+  }
+  
+  #error_explanation li {
+    text-align: left; /* リスト項目を左揃えに */
+  }
+
+/* メインコンテンツの設定 */
+main {
+    flex: 1;
+    padding-top: 10px;
+}
+
+/* フッターの設定 */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+@media (min-width: 769px) {
+    .menu-toggle,
+    .menu-close {
+      display: none;
+    }
+  }
+
+@media (max-width: 767px) {
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+    }
+
+    header nav ul {
+        position: fixed;
+        top: 0;
+        right: -250px; /* メニューを画面外に配置 */
+        width: 250px;
+        padding-top: 1rem;
+        background-color: #333;
+        flex-direction: column;
+        justify-content: flex-start;
+        transition: right 0.3s ease;
+        z-index: 1000; /* メニューが他のコンテンツの上に表示されるように */
+    }
+
+    nav ul.open {
+        right: 0; /* メニューがスライドインする */
+    }
+
+    .menu-close {
+        display: block;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        margin-left: 10px;
+        text-align: left;
+    }
+
+    .current-li {
+        flex-direction: column;
+        gap: 0; /* gapをなくす */
+    }
+
+    .current-li li {
+        width: 100%; /* 幅を100%にする */
+    }
+
+    .current-li li a {
+        margin-left: 0;
+        padding: 10px 0; /* クリックできる範囲を確保 */
+        text-align: left;
+        margin-left: 10px;
+        font-size: 20px; /* フォントサイズを調整 */
+        display: block; /* ブロック要素にする */
+        width: 100%; /* 幅を100%にする */
+    }
+
+    .current-li button {
+        font-size: 20px;
+        padding: 5px 6px;
+        width: 300px;
+    }
+}

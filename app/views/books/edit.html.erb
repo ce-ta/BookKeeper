@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書籍編集</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/assets/book_edit.css">
+</head>
+<body>
+<h1 class="title">書籍編集</h1>
+<div class="container">
+  <% if flash[:error].present? %>
+    <div class="flash-error-message">
+      <% flash[:error].split(',').each do |error| %>
+        <div><%= error.strip %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+<%= form_with(model: @book, local: true, html: { multipart: true }) do |f| %>
+  <div class="form-body">
+    <div class="form-group">
+      <%= f.label :title, "タイトル:" %>
+      <%= f.text_area :title, id: "title", rows: 1, onkeydown: "return event.key != 'Enter';" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :author, "著者:" %>
+      <%= f.text_area :author, id: "author", rows: 1, onkeydown: "return event.key != 'Enter';" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :publisher, "出版社:" %>
+      <%= f.text_area :publisher, id: "publisher", rows: 1, onkeydown: "return event.key != 'Enter';" %>
+    </div>
+
+    <div class="radio-container">
+      <div class="form-group">
+        <%= f.radio_button :genre, "文学・文芸", id: "literature" %>
+        <%= f.label :genre, "文学・文芸", for: "literature", class: "radio-btn" %><br>
+
+        <%= f.radio_button :genre, "雑誌", id: "magazine" %>
+        <%= f.label :genre, "雑誌", for: "magazine", class: "radio-btn" %><br>
+
+        <%= f.radio_button :genre, "コミック", id: "comic" %>
+        <%= f.label :genre, "コミック", for: "comic", class: "radio-btn" %><br>
+
+        <%= f.radio_button :genre, "文庫", id: "pocketbook" %>
+        <%= f.label :genre, "文庫", for: "pocketbook", class: "radio-btn" %><br>
+      </div>
+
+      <div class="form-group">
+        <%= f.radio_button :genre, "文芸書", id: "literary_book" %>
+        <%= f.label :genre, "文芸書", for: "literary_book", class: "radio-btn" %><br>
+
+        <%= f.radio_button :genre, "専門書", id: "specialist_book" %>
+        <%= f.label :genre, "専門書", for: "specialist_book", class: "radio-btn" %><br>
+
+        <%= f.radio_button :genre, "児童書・学習参考書", id: "children_reference" %>
+        <%= f.label :genre, "児童書・学習参考書", for: "children_reference", class: "radio-btn" %><br>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <%= f.label :date, "出版日※半角数字で８字入力してください" %>
+      <%= f.text_field :date, id: "dateInput", class: "date-input", maxlength: 8, oninput: "formatDate(this)", value: (params[:book] ? params[:book][:date] : (@book.date.present? ? @book.date.strftime("%Y/%m/%d") : "")) %>
+    </div>
+
+    <div class="input-container-img">
+      <%= f.label :book_image, "表紙画像" %>
+      <%= f.file_field :book_image, id: "imageInput", accept: "image/*", onchange: "previewImage(event)" %>
+    </div>
+
+    <div class="image-preview-container">
+      <%= image_tag(@book.book_image.url, id: "imagePreview", class: "image-preview", alt: (@book.book_image.present? ? 'Current book image' : 'jpgまたはpngファイルをアップロードしてください')) %>
+    </div>
+
+    <div class="registration-btn">
+      <%= f.submit "保存" %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<!-- モーダルウィンドウの構造 -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+  <div id="caption"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  var modal = document.getElementById("imageModal");
+  var modalImg = document.getElementById("modalImage");
+  var captionText = document.getElementById("caption");
+
+  // 画像のプレビュー表示のための関数
+  function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      var output = document.getElementById('imagePreview');
+      output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  // 日付の入力フォーマットを整形する関数
+  function formatDate(input) {
+    let value = input.value.replace(/\D/g, ''); // 数字以外の文字を削除
+
+    if (value.length !== 8) {
+      input.value = value;
+      validateDate(); // 日付の妥当性を検証
+      return;
+    }
+
+    let year = value.substring(0, 4);
+    let month = value.substring(4, 6);
+    let day = value.substring(6, 8);
+
+    input.value = `${year}/${month}/${day}`;
+    validateDate(); // 日付の妥当性を検証
+  }
+
+  // 日付の妥当性を検証する関数
+  function validateDate() {
+    var dateInput = document.getElementById("dateInput");
+    var parts = dateInput.value.split('/');
+    if (parts.length !== 3) {
+      dateInput.setCustomValidity("日付は半角数字8文字で入力してください");
+      return;
+    }
+    var year = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var day = parseInt(parts[2], 10);
+    var date = new Date(year, month - 1, day);
+
+    // 今日の日付を取得
+    var today = new Date();
+    today.setHours(0, 0, 0, 0); // 時間をゼロにセット
+
+    if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
+      dateInput.setCustomValidity("有効な日付を入力してください");
+    } else if (date > today) {
+      dateInput.setCustomValidity("今日より先の日付は設定できません");
+    } else {
+      dateInput.setCustomValidity("");
+    }
+  }
+
+  // モーダルの閉じるボタンのイベントリスナー
+  document.querySelector('.close').onclick = function() {
+    modal.style.display = "none";
+  };
+
+  // 画像クリック時のモーダル表示
+  document.querySelectorAll('.image-preview').forEach(img => {
+    img.onclick = function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
+  });
+
+  // フォームのサブミット時のイベントリスナー
+  var form = document.querySelector('form');
+  var dateInput = document.getElementById("dateInput");
+
+  form.addEventListener('submit', (event) => {
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      validateDate();
+      dateInput.reportValidity();
+    }
+  });
+
+  // 画像選択時にプレビューを更新
+  var imageInput = document.getElementById('imageInput');
+  imageInput.addEventListener('change', previewImage);
+
+  // ページロード時の初期表示
+  if (dateInput.value) {
+    dateInput.value = dateInput.value.replace(/(\d{4})(\d{2})(\d{2})/, '$1/$2/$3');
+    validateDate(); // 日付の妥当性を検証
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザー詳細</title>
+  <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+
+  <div class="user-details-container">
+    <div class="user-details">
+      <div class="user-image-and-name">
+        <% if @user.avatar.present? %>
+          <%= image_tag @user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+        <% else %>
+          <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+        <% end %>
+        <h2 class="user-name"><%= @user.name %></h2>
+      </div>
+      <div class="user-bio">
+        <%= @user.bio %>
+      </div>
+      <div class="user-action">
+        <% if @user.id == current_user.id %>
+          <div class="user-edit">
+            <%= link_to "編集", edit_user_registration_path, class: "edit-button" %>
+          </div>
+          <div class="user-destroy">
+            <%= button_to "削除", user_path(@user), method: :delete, class: "delete-button", data: { confirm: "本当に削除しますか？" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-links">
+    <h2 class="tab-link" data-target="posts">投稿</h2>
+    <h2 class="tab-link" data-target="comments">コメント</h2>
+    <h2 class="tab-link" data-target="favorites">いいねした投稿</h2>
+  </div>
+
+  <div class="tab-content" id="posts">
+    <div class="posts-container">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <%= link_to post_path(post), class: "post-link" do %>
+          <div class="post-container">
+            <div class="user-info">
+              <div class="user-avatar">
+                <% if post.user.avatar.present? %>
+                  <%= image_tag post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+                <% else %>
+                  <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+                <% end %>
+              </div>
+              <div class="user-name">
+                <p><%= post.user.name if post.user %></p>
+              </div>
+            </div>
+            <div class="post-title">
+              <%= post.title %>
+            </div>
+            <div class="post-genre">
+              <%= post.genre %>
+            </div>
+            <div class="post-content">
+              <%= post.content %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p class="no-post">まだ投稿はありません</p>
+    <% end %>
+    </div>
+  </div>
+  
+  <div class="tab-content" id="comments">
+    <div class="comments-container">
+      <% if @comments.any? %>
+        <% @comments.each do |comment| %>
+          <%= link_to post_path(comment.post, anchor: "comment_#{comment.id}"), class: "comment-link" do %>
+            <div class="comment-container">
+              <div class="comment-user-and-avatar">
+                <% if comment.user.avatar.present? %>
+                  <%= image_tag comment.user.avatar.url, alt: "ユーザーアイコン", class: "comment-user-avatar" %>
+                <% else %>
+                  <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+                <% end %>
+                <div class="comment-user">
+                  <p><%= comment.user.name %></p>
+                </div>
+              </div>
+              <div class="comment-body">
+                <p><%= comment.body %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="no-comment">まだコメントはありません</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tab-content" id="favorites">
+    <div class="favorites-container">
+      <% if @favorite_posts.any? %>
+        <% @favorite_posts.each do |post| %>
+          <%= link_to post_path(post), class: "post-link" do %>
+            <div class="favorite-container">
+              <div class="user-info">
+                <div class="user-avatar">
+                  <% if post.user.avatar.present? %>
+                    <%= image_tag post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+                  <% else %>
+                    <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
+                  <% end %>
+                </div>
+                <div class="user-name">
+                  <p><%= post.user.name %></p>
+                </div>
+              </div>
+              <div class="post-title">
+                <%= post.title %>
+              </div>
+              <div class="post-genre">
+                <%= post.genre %>
+              </div>
+              <div class="post-content">
+                <%= post.content %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="no-favorite">まだいいねした投稿はありません</p>
+      <% end %>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        const confirmed = confirm("本当に削除しますか？");
+        if (!confirmed) {
+          event.preventDefault(); // 削除をキャンセルする
+        }
+      });
+    });
+
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // 初期表示
+    tabContents.forEach(content => {
+      content.style.display = 'none';
+    });
+    document.getElementById('posts').style.display = 'block'; // 最初は投稿を表示
+    tabLinks[0].classList.add('active'); // 最初のタブをアクティブにする
+
+    // タブリンクのクリックイベント
+    tabLinks.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault(); // リンクのデフォルトの動作を無効化
+        const target = this.dataset.target;
+
+        // アクティブなタブのスタイルを設定する
+        tabLinks.forEach(tabLink => {
+          tabLink.classList.remove('active');
+        });
+        this.classList.add('active');
+
+        // すべてのコンテンツを非表示にする
+        tabContents.forEach(content => {
+          content.style.display = 'none';
+        });
+
+        // クリックしたタブに対応するコンテンツをスライド表示する
+        document.getElementById(target).style.display = 'block';
+      });
+    });
+  });
+</script>
+</body>
+</html>

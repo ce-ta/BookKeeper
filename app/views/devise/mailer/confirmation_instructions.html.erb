@@ -1,0 +1,7 @@
+<p>ようこそ <%= @resource.name %> さん</p>
+
+<p>以下のリンクをクリックして、アカウントを有効化してください：</p>
+
+<p><%= link_to 'アカウントを有効化する', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>このリンクの有効期限は1時間です</p>

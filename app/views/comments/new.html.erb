@@ -1,0 +1,53 @@
+<head>
+  <title>コメントを投稿する</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media="all" href="/assets/comment_new.css" data-turbolinks-track="reload" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <% if flash[:error].present? %>
+  <div class="flash error">
+    <%= flash[:error] %>
+  </div>
+  <% end %>
+
+  
+  <h1 class="title">コメントを投稿する</h1>
+  <div class="comment-container">
+    <%= form_with(model: [@post, @comment], local: true) do |form| %>
+      <div class="form-group">
+        <%= form.label :body, "コメント", class: "form-label" %>
+        <%= form.text_area :body, class: "form-label", maxlength: "140", rows: 4, onkeydown: "return event.key != 'Enter';" %>
+      </div>
+      <div class="actions">
+        <%= form.submit '投稿', class: "btn-submit"  %>
+      </div>
+    <% end %>
+
+    <%= link_to '戻る', post_path(@post), class: 'back-link' %>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const starRatings = document.querySelectorAll('.rating-input');
+
+    starRatings.forEach((rating) => {
+      rating.addEventListener('change', (e) => {
+        const stars = rating.parentNode.querySelectorAll('.rating-label');
+        stars.forEach((star) => {
+          star.classList.remove('selected');
+        });
+        e.target.nextElementSibling.classList.add('selected');
+      });
+    });
+
+    // 感想のテキストエリアの文字数制限
+    const textArea = document.querySelector('.form-label');
+    textArea.addEventListener('input', function() {
+      if (this.value.length > 140) {
+        this.value = this.value.slice(0, 140); // 最大文字数を超えた場合は切り捨てる
+      }
+    });
+  });
+</script>
+</body>
