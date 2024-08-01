@@ -25,6 +25,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'registration_test@example.com'
+  config.mailer.default_url_options = { host: 'bookkeeper-wandering-sea-5896.fly.dev' }
 
   config.confirm_within = 1.hour 
   config.timeout_in = 30.minutes
