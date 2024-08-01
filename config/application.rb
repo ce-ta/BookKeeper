@@ -18,6 +18,8 @@ module BookKeeper
 
     config.i18n.default_locale = :ja
 
+    config.action_mailer.default_url_options = { host: 'bookkeeper-delicate-snow-8020.fly.dev' }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
