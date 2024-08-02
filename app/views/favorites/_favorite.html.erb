@@ -2,14 +2,14 @@
   <p>
     <%= button_to post_favorite_path(post), method: :delete, remote: true, class: "favorite-button" do %>
       <i class="fas fa-heart" style="color:red;"></i>
-      <span class="favorite-count"><%= post.favorite.count %></span>
+      <span class="favorite-count"><%= post.favorites.count %></span>
     <% end %>
   </p>
 <% else %>
   <p>
     <%= button_to post_favorites_path(post), method: :post, remote: true, class: "favorite-button" do %>
       <i class="far fa-heart"></i>
-      <span class="favorite-count"><%= post.favorite.count %></span>
+      <span class="favorite-count"><%= post.favorites.count %></span>
     <% end %>
   </p>
 <% end %>

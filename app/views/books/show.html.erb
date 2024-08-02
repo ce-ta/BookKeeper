@@ -63,7 +63,7 @@
       </div>
 
       <div class="book-destroy">
-        <%= button_to(book_path(params[:id]), class: "btn-delete", method: :delete, data: { confirm: "本当に削除しますか？" }) do %>
+        <%= button_to(book_path(params[:id]), class: "btn-delete", method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } }) do %>
           <i class="fas fa-trash-alt"></i> 削除
         <% end %>    
       </div>

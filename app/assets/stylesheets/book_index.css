@@ -11,7 +11,7 @@ body {
   margin-top: -10px;
 }
 
-h1 {
+.index-title {
   text-align: center;
   margin-top: -15px;
   margin-bottom: 20px;
@@ -127,8 +127,8 @@ margin-bottom: -5px;
 
 .book-item {
   width: calc(16.666% - 20px);
-  margin-right: 20px;
   margin-bottom: 20px;
+  margin-left : 20px;
 }
 
 .book-thumbnail {

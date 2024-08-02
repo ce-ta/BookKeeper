@@ -27,6 +27,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  font-size: 45px;
 }
 
 .book-container {
@@ -39,7 +40,7 @@
 }
 
 .book-title {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   margin-bottom: -13px;
 }
