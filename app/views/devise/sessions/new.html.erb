@@ -2,7 +2,7 @@
   <meta charset="UTF-8">
   <title>ログイン</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag '/assets/session_new.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'session_new', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
 
@@ -17,10 +17,6 @@
         <%= f.password_field :password, id: "password" %>
 
         <%= f.submit "ログイン" %>
-      <% end %>
-
-      <% if devise_mapping.recoverable? && controller_name != 'passwords' %>
-        <%= link_to "パスワードを忘れました", new_password_path(resource_name), class: "centered-link" %>
       <% end %>
     </div>
 </div>

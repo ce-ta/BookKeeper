@@ -4,7 +4,6 @@ class User < ApplicationRecord
          :recoverable, # パスワードリセット機能
          :rememberable, # ユーザーのログインセッションを管理する機能
          :validatable, # バリデーションを行う機能
-         :confirmable, # メールアドレス認証機能
          :omniauthable, # 外部認証サービスとの連携を可能にする機能
          omniauth_providers: %i[github google_oauth2] # OmniAuthを使った認証プロバイダーを指定する
 

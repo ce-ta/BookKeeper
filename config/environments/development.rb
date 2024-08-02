@@ -8,10 +8,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.enable_reloading = true
 
-  config.action_mailer.default_url_options = {  host: 'bookkeeper-delicate-snow-8020.fly.dev'}
-
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = {  host: 'localhost', port: 3000 }
+  ActionMailer::Base.delivery_method = :letter_opener
 
   # Do not eager load code on boot.
   config.eager_load = false
