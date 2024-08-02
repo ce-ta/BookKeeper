@@ -71,9 +71,13 @@
       <%= f.label :book_image, "表紙画像" %>
       <%= f.file_field :book_image, id: "imageInput", accept: "image/*", onchange: "previewImage(event)" %>
     </div>
-
+  
     <div class="image-preview-container">
-      <%= image_tag(@book.book_image.url, id: "imagePreview", class: "image-preview", alt: (@book.book_image.present? ? 'Current book image' : 'jpgまたはpngファイルをアップロードしてください')) %>
+      <% if @book.book_image.attached? %>
+        <%= image_tag url_for(@book.book_image), id: "imagePreview", class: "image-preview", alt: 'Current book image' %>
+      <% else %>
+        <%= image_tag "default_image.jpg", id: "imagePreview", class: "image-preview", alt: 'jpgまたはpngファイルをアップロードしてください' %>
+      <% end %>
     </div>
 
     <div class="registration-btn">
