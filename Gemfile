@@ -51,7 +51,8 @@ group :development, :test do
   gem 'factory_bot_rails'
 end
 
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave'
+gem 'mini_magick'
 
 gem 'bcrypt', '~> 3.1.7'
 

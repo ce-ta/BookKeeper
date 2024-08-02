@@ -405,7 +405,7 @@ DEPENDENCIES
   bootsnap
   capybara
   capybara-email
-  carrierwave (~> 2.0)
+  carrierwave
   debug
   devise
   devise-i18n
@@ -416,6 +416,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   letter_opener_web
+  mini_magick
   omniauth
   omniauth-github
   omniauth-google-oauth2
