@@ -8,7 +8,7 @@ class User < ApplicationRecord
          omniauth_providers: %i[github google_oauth2] # OmniAuthを使った認証プロバイダーを指定する
 
   # mount_uploaderメソッドでavatarカラムにファイルのアップロード機能を追加、アップローダーとモデルの関連付け、ファイル処理のカスタマイズを行う
-  mount_uploader :avatar, AvatarUploader
+  has_one_attached :avatar
 
   # has_manyオプションでPostモデルが複数のcomennt等を持つことを許可し、dependentオプションで、関連づけられた投稿が削除された時に一緒に削除されるようにする
   has_many :books, dependent: :destroy
