@@ -9,7 +9,9 @@ Rails.application.configure do
   config.enable_reloading = true
 
   config.action_mailer.default_url_options = {  host: 'bookkeeper-delicate-snow-8020.fly.dev'}
-  ActionMailer::Base.delivery_method = :letter_opener
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
 
   # Do not eager load code on boot.
   config.eager_load = false
