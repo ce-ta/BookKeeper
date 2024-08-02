@@ -17,10 +17,10 @@
   <div class="show-container">
     <div class="book-container">
       <div class="book-image-data">
-        <% if @book.book_image.present? %>
-        <%= image_tag @book.book_image.url, class: "book-image", id: "bookImage" %>
+        <% if @book.book_image.attached? %>
+          <%= image_tag url_for(@book.book_image), class: "book-image", id: "bookImage" %>
         <% else %>
-        <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "book-image" %>
+          <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "book-image" %>
         <% end %>
       </div>
 

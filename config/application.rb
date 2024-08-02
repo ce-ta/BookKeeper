@@ -18,6 +18,10 @@ module BookKeeper
 
     config.i18n.default_locale = :ja
 
+    config.after_initialize do
+      ActiveStorage::Current.url_options = { protocol: 'https', host: 'local' }
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

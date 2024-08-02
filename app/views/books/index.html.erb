@@ -48,8 +48,8 @@
     <div class="book-item">
       <%= link_to(book_path(book)) do %>
         <div class="book-image">
-          <% if book.book_image.present? %>
-            <%= image_tag book.book_image.url, class: "book-thumbnail" %>
+          <% if book.book_image.attached? %>
+            <%= image_tag url_for(book.book_image), class: "book-thumbnail" %>
           <% else %>
             <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "book-thumbnail" %>
           <% end %>

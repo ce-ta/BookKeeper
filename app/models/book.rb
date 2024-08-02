@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
     # mount_uploaderメソッドでbook_imageカラムにファイルのアップロード機能を追加、アップローダーとモデルの関連付け、ファイル処理のカスタマイズを行う
-    mount_uploader :book_image, BookImageUploader
+    has_one_attached :book_image
     belongs_to :user
     
     # precenceオプションで空白を防ぎ、lengthオプションで最大文字数を制限する
