@@ -38,7 +38,7 @@
             <div class="user-info">
               <div class="user-avatar">
                 <% if post.user.avatar.present? %>
-                  <%= image_tag post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+                  <%= image_tag url_for(post.user.avatar), alt: "ユーザーアイコン", class: "user-avatar" %>
                 <% else %>
                   <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
                 <% end %>

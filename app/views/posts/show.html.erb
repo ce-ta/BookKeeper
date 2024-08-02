@@ -13,8 +13,8 @@
     <% if @post.user.present? %>
       <%= link_to user_path(@post.user), class: "user-info" do %>
         <div class="user-avatar">
-          <% if @post.user.avatar.present? %>
-            <%= image_tag @post.user.avatar.url, alt: "ユーザーアイコン", class: "user-avatar" %>
+          <% if @post.user.avatar.attached? %>
+            <%= image_tag url_for(@post.user.avatar), alt: "ユーザーアイコン", class: "user-avatar" %>
           <% else %>
             <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
           <% end %>
@@ -30,14 +30,14 @@
     <p><%= @post.content %></p>
     <p>投稿日: <%= @post.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
 
-<td id="favorite_buttons_<%= @post.id %>" >
-  <div class="button-container">
-    <%= render "favorites/favorite", post: @post %>
-    <%= link_to new_post_comment_path(@post), class: 'btn btn-primary' do %>
-      <i class="fas fa-comment-dots"></i> コメントする
-    <% end %>
-  </div>
-</td>
+    <td id="favorite_buttons_<%= @post.id %>">
+      <div class="button-container">
+        <%= render "favorites/favorite", post: @post %>
+        <%= link_to new_post_comment_path(@post), class: 'btn btn-primary' do %>
+          <i class="fas fa-comment-dots"></i> コメントする
+        <% end %>
+      </div>
+    </td>
 
     <% if current_user.present? && @post.user == current_user %>
       <div class="post-menus">
@@ -53,15 +53,14 @@
         </div>
       </div>
     <% end %>
-
   </div>
 
   <% @post.comments.each do |comment| %>
     <div class="comment">
       <div class="comment-user-and-avatar">
         <%= link_to user_path(comment.user), class: 'comment-user-link' do %>
-          <% if comment.user.avatar.present? %>
-            <%= image_tag comment.user.avatar.url, alt: "ユーザーアイコン", class: "comment-user-avatar" %>
+          <% if comment.user.avatar.attached? %>
+            <%= image_tag url_for(comment.user.avatar), alt: "ユーザーアイコン", class: "comment-user-avatar" %>
           <% else %>
             <%= image_tag "NoImage.jpg", alt: "デフォルトアイコン", class: "user-avatar" %>
           <% end %>
@@ -73,31 +72,30 @@
       <div class="comment-body"><p><%= comment.body %></p></div>
 
       <% if current_user.present? && comment.user == current_user %>
-      <div class="comment-menus">
-        <div class="comment-edit">
-          <%= link_to edit_comment_path(comment), class: "btn-edit" do %>
-            <i class="fas fa-edit"></i> 編集
-          <% end %>
-        </div>
-        <div class="comment-delete-btn">
-          <%= button_to comment_path(comment), class: "btn-delete", method: :delete, onclick: "return confirm('本当に削除しますか？');" do %>
-            <i class="fas fa-trash"></i> 削除
-          <% end %>
-        </div>
+        <div class="comment-menus">
+          <div class="comment-edit">
+            <%= link_to edit_comment_path(comment), class: "btn-edit" do %>
+              <i class="fas fa-edit"></i> 編集
+            <% end %>
+          </div>
+          <div class="comment-delete-btn">
+            <%= button_to comment_path(comment), class: "btn-delete", method: :delete, onclick: "return confirm('本当に削除しますか？');" do %>
+              <i class="fas fa-trash"></i> 削除
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
   <% end %>
 
   <script>
-      const deleteButtons = document.querySelectorAll('.btn-delete');
-      deleteButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-          const confirmed = confirm("本当に削除しますか？");
-          if (!confirmed) {
-            event.preventDefault(); // 削除をキャンセルする
-          }
-        });
+    const deleteButtons = document.querySelectorAll('.btn-delete');
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        const confirmed = confirm("本当に削除しますか？");
+        if (!confirmed) {
+          event.preventDefault(); // 削除をキャンセルする
+        }
       });
     });
   </script>
