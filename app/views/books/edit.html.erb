@@ -69,7 +69,7 @@
       <% if @book.book_image.attached? %>
         <%= image_tag url_for(@book.book_image), id: "imagePreview", class: "image-preview", alt: 'Current book image' %>
       <% else %>
-        <%= image_tag "default_image.jpg", id: "imagePreview", class: "image-preview", alt: 'jpgまたはpngファイルをアップロードしてください' %>
+        <%= image_tag "NoImage.jpg", id: "imagePreview", class: "image-preview", alt: 'jpgまたはpngファイルをアップロードしてください' %>
       <% end %>
     </div>
 

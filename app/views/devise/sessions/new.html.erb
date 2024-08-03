@@ -20,28 +20,3 @@
       <% end %>
     </div>
 </div>
-
-
-<h3 class="login-label">以下でログインする</h3>
-
-<div class="login-container">
-  <% if devise_mapping.omniauthable? %>
-    <% resource_class.omniauth_providers.each do |provider| %>
-      <% if provider.to_s == 'github' %>
-        <div class="omniauth-button-container" onclick="location.href='<%= omniauth_authorize_path(resource_name, provider) %>';">
-          <div class="omniauth-button-content", id: "github_signin_button">
-            <%= image_tag 'github_icon.png', alt: "GitHubでログイン", class: 'provider-icon', id: "github_signin_button" %>
-            <span class="provider-name">ログイン</span>
-          </div>
-        </div>
-      <% elsif provider.to_s == 'google_oauth2' %>
-        <div class="omniauth-button-container" onclick="location.href='<%= omniauth_authorize_path(resource_name, provider) %>';">
-          <div class="omniauth-button-content", id: "google_signin_button">
-            <%= image_tag 'google_login_button.png', alt: 'Googleでログイン', class: 'provider-icon', id: "google_signin_button" %>
-            <span class="provider-name">ログイン</span>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
-</div>

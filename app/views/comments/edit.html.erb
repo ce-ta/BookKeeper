@@ -1,12 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%= stylesheet_link_tag 'comment_edit', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<% if flash[:error] %>
-  <div class="flash">
-    <%= flash[:error] %>
-  </div>
-<% end %>
-
 <h1 class="title">コメントを編集</h1>
 <div class="comment-container">
   <%= form_with(model: @comment, local: true) do |f| %>

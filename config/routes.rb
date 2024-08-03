@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create, :destroy]
   end
 
+  resources :comments
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   get 'test/index'
