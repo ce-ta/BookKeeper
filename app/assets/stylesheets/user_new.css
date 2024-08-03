@@ -3,7 +3,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
-  width: 300px; /* 幅を指定 */
+  width: 500px; /* 幅を指定 */
   text-align: center; /* 中央揃えにする */
   margin: auto; /* 中央に配置 */
 }
@@ -23,11 +23,21 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: calc(100% - 12px); /* 幅を計算して指定 */
+  width: 100%; /* 幅を計算して指定 */
   padding: 6px; /* 内側の余白を設定 */
   border: 1px solid #cccccc; /* 枠線を設定 */
   border-radius: 4px; /* 角丸にする */
   box-sizing: border-box; /* ボックスモデルを設定 */
+}
+
+.bio-field {
+  width: 100%; /* 幅を計算して指定 */
+  height: 110px;
+  padding: 6px; /* 内側の余白を設定 */
+  border: 1px solid #cccccc; /* 枠線を設定 */
+  border-radius: 4px; /* 角丸にする */
+  box-sizing: border-box; /* ボックスモデルを設定 */
+  resize: none;
 }
 
 .input {

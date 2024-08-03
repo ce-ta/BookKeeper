@@ -27,12 +27,6 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
         bio: 自己紹介文
-      book:
-        Title: タイトル
-        Author: 著者
-        Publisher: 出版社
-        Genre: ジャンル
-        Date: 出版日
     models:
       user: ユーザー
   devise:
@@ -146,3 +140,22 @@ ja:
       expired: の有効期限が切れました。新しくリクエストしてください。
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
+ja:
+  activerecord:
+    errors:
+      models:
+        book:
+          attributes:
+            title:
+              blank: "が空欄です"
+              too_long: "は30文字以内で入力してください"
+            author:
+              blank: "が空欄です"
+              too_long: "は20文字以内で入力してください"
+            publisher:
+              blank: "が空欄です"
+              too_long: "は10文字以内で入力してください"
+            genre:
+              blank: "が未選択です"
+            date:
+              blank: "が空欄です"

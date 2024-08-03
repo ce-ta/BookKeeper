@@ -10,8 +10,7 @@ class BooksController < ApplicationController
   
       # invaild?メソッドで、新規作成しようとした書籍情報がバリデーションに違反している場合、custom_error_messagesメソッドのエラーメッセージを表示させる
       if @book.invalid?
-        error_messages = custom_error_messages(@book)
-        flash.now[:error] = error_messages.join(", ")
+        flash.now[:error] = @book.errors.full_messages.join(", ")
         render :new
         return
       end
@@ -37,14 +36,14 @@ class BooksController < ApplicationController
         redirect_to books_path and return
       end
       
-      # invaild?メソッドで、更新しようとした書籍情報がバリデーションに違反している場合、custom_error_messagesメソッドのエラーメッセージを表示させる
+      @book.assign_attributes(book_params)
+      
       if @book.invalid?
-        error_messages = custom_error_messages(@book)
-        flash[:error] = error_messages.join(", ")
+        flash.now[:error] = @book.errors.full_messages.join(", ")
         render :edit
         return
       end
-    
+      
       if @book.update(book_params)
         flash[:success] = "書籍情報が更新されました"
         redirect_to books_path
@@ -113,40 +112,13 @@ class BooksController < ApplicationController
     # 設定したバリデーションエラーに対するカスタムエラーメッセージを生成する
     def custom_error_messages(record)
       error_messages = []
-
-      # attributeはエラーが発生した属性名、messageはその属性に対するエラーメッセージが入る
+    
       record.errors.each do |attribute, message|
-        case attribute
-        when :title
-          if message == "can't be blank"
-            error_messages << "タイトルが空欄です"
-          elsif message == "is too long (maximum is 30 characters)"
-            error_messages << "タイトルは30文字以内で入力してください"
-          end
-        when :author
-          if message == "can't be blank"
-            error_messages << "著者が空欄です"
-          elsif message == "is too long (maximum is 20 characters)"
-            error_messages << "著者は20文字以内で入力してください"
-          end
-        when :publisher
-          if message == "can't be blank"
-            error_messages << "出版社が空欄です"
-          elsif message == "is too long (maximum is 10 characters)"
-            error_messages << "出版社は10文字以内で入力してください"
-          end
-        when :genre
-          if message == "can't be blank"
-            error_messages << "ジャンルが未選択です"
-          end
-        when :date
-          if message == "can't be blank"
-            error_messages << "出版日が空欄です"
-          end
+        error_key = "activerecord.errors.models.book.attributes.#{attribute}.#{message}"
+        error_message = I18n.t(error_key, default: message)
+        error_messages << error_message
       end
-      
-      # 配列を返す
+    
       error_messages
     end
   end
-  end  

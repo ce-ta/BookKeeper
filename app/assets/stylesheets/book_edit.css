@@ -8,24 +8,6 @@
   border-radius: 5px;
 }
 
-.flash-error-message {
-  font-size: 25px;
-  font-weight: bold;
-  padding: 10px;
-  text-align: center;
-  color: red;
-  margin-bottom: 20px;
-}
-
-.flash-success-message {
-  font-size: 25px;
-  font-weight: bold;
-  padding: 10px;
-  text-align: center;
-  color: #32CD32;
-  margin-bottom: 20px;
-}
-
 .title {
   display: flex;
   justify-content: center;
@@ -34,7 +16,7 @@
   }
 
 textarea {
-  max-width: 100%;
+  width: 85%;
   min-height: 25px;
   resize: none;
   overflow: hidden;

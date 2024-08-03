@@ -22,8 +22,8 @@ class User < ApplicationRecord
   has_many :favorited_posts, through: :favorites, source: :post
     
     # precenceメソッドで空白を防ぎ、uniquenessオプションで一意性を確保する
-    validates :name, presence: true, uniqueness: true
-    validates :email, presence: true, uniqueness: true
+    validates :name, presence: true, uniqueness: true, length: { maximum: 25 }
+    validates :email, presence: true, uniqueness: true, length: { maximum: 255 }
 
     # lengthオプションで最大文字数を指定する
     validates :bio, length: { maximum: 100 }

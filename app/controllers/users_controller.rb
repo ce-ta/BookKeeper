@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     end
     
     if errors[:password].any?
-      error_messages << "パスワードは8文字以上で入力してください"
+      error_messages << "パスワードは6文字以上で入力してください"
     end
     
     if errors[:bio].any?

@@ -10,13 +10,6 @@
 <body>
 <h1 class="title">書籍編集</h1>
 <div class="container">
-  <% if flash[:error].present? %>
-    <div class="flash-error-message">
-      <% flash[:error].split(',').each do |error| %>
-        <div><%= error.strip %></div>
-      <% end %>
-    </div>
-  <% end %>
 
 <%= form_with(model: @book, local: true, html: { multipart: true }) do |f| %>
   <div class="form-body">

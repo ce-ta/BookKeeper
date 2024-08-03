@@ -1,22 +1,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%= stylesheet_link_tag 'book_new', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div class="message">
-<% if flash[:error].present? %>
-  <div class="error-messages">
-    <% flash[:error].split(',').each do |error| %>
-      <div><%= error.strip %></div>
-    <% end %>
-  </div>
-  <% elsif flash[:success] %>
-  <div id="flash-success-message">
-    <%= flash[:success] %>
-  </div>
-  <% end %>
-</div>
-
 <h1 class="title">書籍登録</h1>
+
 <div class="container">
+
   <%= form_with(model: @book, local: true, data: { turbo: false }, html: { multipart: true }) do |f| %>
     <div class="form-group">
       <%= f.label :title, "タイトル:" %>

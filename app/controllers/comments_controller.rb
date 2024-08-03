@@ -18,7 +18,6 @@ class CommentsController < ApplicationController
       flash[:success] = "コメントを投稿しました"
       redirect_to post_path(@post)
     else
-      flash.now[:error] = "コメントの投稿に失敗しました"
       render :new
     end
   end

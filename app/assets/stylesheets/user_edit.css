@@ -20,7 +20,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
-  width: 350px; /* 幅を指定 */
+  width: 500px; /* 幅を指定 */
   text-align: center; /* 中央揃えにする */
   margin: 10px auto; /* 中央に配置 */
 }
@@ -37,9 +37,9 @@ label {
   color: #555555; /* テキスト色を設定 */
 }
 
-.bio {
-  width: calc(100% - 12px);
-  height: 130px;
+.bio-field {
+  width: 100%;
+  height: 120px;
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;

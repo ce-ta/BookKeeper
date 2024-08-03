@@ -22,13 +22,13 @@
     <%= f.label :avatar, "アイコン" %>
     <%= f.file_field :avatar, id: "avatar", accept: "image/*", onchange: "previewAvatar(this);" %>
     <div class="avatar-preview-container">
-      <img id="avatar-preview" src="<%= @user.avatar.url %>" alt="Current Avatar" class="avatar-preview">
+      <img id="avatar-preview" src="url_for(@user.avatar)" alt="Current Avatar" class="avatar-preview">
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :bio, "自己紹介" %>
-    <%= f.text_area :bio, id: "bio", class: "bio", maxlength: 100, row: 5 %>
+    <%= f.text_area :bio, id: "bio", class: "bio-field" %>
   </div>
 
   <%= f.submit "保存", class: "input" %>

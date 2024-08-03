@@ -17,7 +17,7 @@
   }
 
 textarea {
-  max-width: 100%;
+  width: 85%;
   min-height: 25px;
   resize: none;
   overflow: hidden;
